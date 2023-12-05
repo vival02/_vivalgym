@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Seleziona un esercizio  <button mat-button (click)="onClosed()" >Finito</button></h2> 
+<mat-dialog-content>
+<div class="responsive-grid">
+  
+
+    <mat-card  *ngFor="let exercise of exercises" class="exercise-card"  >
+      
+
+      <mat-card-header>
+        <mat-card-title>  <h4>{{exercise.nome.toUpperCase()}} </h4></mat-card-title>
+        <mat-card-subtitle>{{exercise.tipologia}}</mat-card-subtitle>
+      </mat-card-header>
+        <!-- <img mat-card-image src="#">-->
+      <mat-card-content>
+        <p>
+          {{exercise.note}}
+        </p>
+      </mat-card-content>
+      <mat-card-content>
+     
+    </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="addExerciseToWorkout(exercise)">Aggiungi</button>
+      </mat-card-actions>
+    </mat-card>
+</div>

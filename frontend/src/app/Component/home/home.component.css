@@ -1,0 +1,168 @@
+.card-body {
+  padding: 10px 10px 10px 10px;
+  display: block;
+  margin: 0 auto;
+
+}
+
+.card-workout-title {
+  padding: 10px 10px 0px 10px;
+  text-align: center;
+  /* orizzontale */
+  line-height: 150px;
+  /* verticale */
+
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
+  border-color: #A9CCE3;
+  background-color: #AED6F1;
+  border-radius: 5px 5px 0px 0px;
+
+}
+
+.card-workout {
+  box-shadow: 5px 5px 5px 2px #dedede;
+  border-bottom: 1px solid;
+  border-bottom-color: #D6DBDF;
+  border-radius: 5px 5px 5px 5px;
+  max-width: 320px;
+  margin: 5% 2% 2% 2%;
+  background-color: #F8F9F9;
+}
+
+.responsive-grid-workout {
+
+  flex-wrap: wrap;
+  display: flex;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+  align-items: center;
+  justify-content: center;
+}
+
+.button-inserisci-workout:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #547990;
+  color: white;
+}
+
+.button-inserisci-workout {
+  margin: 2% 2% 2% 2%;
+  width: 50%;
+}
+
+.aggiungi-workout-button {
+  margin-top: 3%;
+}
+
+
+.add-workout button {
+  display: inline;
+  float: none;
+  box-shadow: 5px 5px 5px 2px #dedede;
+}
+
+.add-workout {
+  display: flex;
+  justify-content: center;
+  /* Centra orizzontalmente */
+  align-items: center;
+  width: 100%;
+  margin: auto;
+
+}
+
+
+.add-workout-form {
+  display: flex;
+  justify-content: center;
+  /* Centra orizzontalmente */
+  align-items: center;
+  margin: auto;
+  margin-top: 4%;
+  margin-bottom: 10%;
+  width: 60%;
+
+  background-color: #F4F6F6;
+  border: 3px solid #1A5276;
+  padding: 10px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.add-button-exercise {
+  width: 35%;
+  background-color: #1A5276;
+  color: white;
+
+}
+
+.exercise-card {
+  text-align: center;
+  width: 100%;
+  margin: 5% 5% 5% 5%;
+
+}
+
+.responsive-grid {
+  display: grid;
+  grid-gap: 2%;
+  grid-template-columns: repeat(3, 1fr);
+
+}
+
+mat-grid-tile {
+  background: lightblue;
+}
+
+.form-control-text {
+  width: 80%;
+  text-align: center;
+  margin-top: 2%;
+  float: center;
+  padding: 12px 20px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.formAddExercise-text {
+  width: 60%;
+  text-align: center;
+  margin-top: 2%;
+  float: center;
+  padding: 12px 20px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.button-card-body {
+  margin: 5px 5px 5px 5px;
+}
+
+.formAddExercise,
+.table table-bordered {
+  width: 100%;
+  text-align: center;
+  position: relative;
+
+}
+
+.table-exercise {
+
+  padding: 3% 3% 3% 3%;
+  text-align: center;
+  position: relative;
+  width: 100%;
+
+}
+
+.button-formAddExercise {}
+
+body {
+
+  background-color: #E4E7EA;
+}

@@ -1,0 +1,32 @@
+<mat-sidenav-container>
+  <mat-sidenav color="accent" [(opened)]="opened" #sidenav mode="side">
+    <mat-list>
+      <mat-list-item>
+        <h1 style="color:black; style:bold;margin-bottom: 5%;">ᐯIᐯᗩᒪGYᗰ</h1>
+      </mat-list-item>
+      <mat-list-item style="margin-bottom: 6%; margin-top: 10%;"><a routerLink="home"
+          style="text-decoration: none;color:#d6d9de; vertical-align: middle;"><mat-icon
+            style="color:#d6d9de;margin-bottom: 2%;">home</mat-icon> Home</a></mat-list-item>
+      <mat-list-item style="margin-bottom: 6%;"> <a routerLink="exercise" style="text-decoration: none;color:#d6d9de">
+          <mat-icon style="color:#d6d9de;margin-bottom: 2%;">list</mat-icon> Esercizi</a></mat-list-item>
+      <mat-list-item style="margin-bottom: 6%;"> <a routerLink="storico" style="text-decoration: none;color:#d6d9de">
+          <mat-icon style="color:#d6d9de;margin-bottom: 2%;">assessment</mat-icon> Storico</a></mat-list-item>
+
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="warning">
+      <mat-toolbar-row>
+
+        <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <span class="componenti">
+      <router-outlet>
+
+      </router-outlet>
+    </span>
+  </mat-sidenav-content>
+</mat-sidenav-container>

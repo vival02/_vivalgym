@@ -1,0 +1,11 @@
+
+.exercise-card {
+
+    max-width: 320px;
+    margin: 5% 5% 5% 5%;
+  }
+  
+  .responsive-grid{
+    display: grid;
+    grid-template-columns:repeat(4,1fr);
+  }

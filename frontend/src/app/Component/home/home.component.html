@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<div class="responsive-grid-workout">
+  <!-- Basic Card Example -->
+  <div *ngFor="let workout of workouts" class="card-workout">
+    <div class="card-workout-title"  color="warn">
+      <h4 style="vertical-align: center">{{ workout.nome.toUpperCase() }}</h4>
+    </div>
+    <span class="card-body" color="warn">
+      <button mat-button class="button-card-body" [routerLink]="['workout', workout.idWorkout]">
+        START
+      </button>
+      <button mat-button class="button-card-body" (click)="modifyWorkout(workout.idWorkout,workout.nome)">
+        MODIFICA
+      </button>
+      <button mat-button class="button-card-body" (click)="eliminaWorkout(workout.idWorkout)">
+        ELIMINA
+      </button>
+    </span>
+  </div>
+</div>
+<div class="add-workout">
+  <button class="aggiungi-workout-button" mat-button (click)="addWorkoutForm()">
+    AGGIUNGI WORKOUT
+  </button>
+</div>
+
+<div class="add-workout-form" *ngIf="showAddWorkoutForm">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="formAddExercise" >
+    <button mat-icon-button (click)="addWorkoutForm()" style="float: right">
+      <mat-icon>close</mat-icon>
+    </button>
+    <p>
+      <input class="formAddExercise-text" type="text" id="fname" formControlName="nome" placeholder="NOME WORKOUT"
+        required autocomplete="off" />
+    </p>
+
+    <table class="table-exercise">
+      <div *ngIf="!isFormValid()" style="float: center">
+        <p>Inserisci il nome e almeno un esercizio</p>
+      </div>
+      <button mat-raised-button class="add-button-exercise" (click)="openDialog()" type="button">
+        Aggiungi esercizio
+      </button>
+
+      <div class="responsive-grid">
+        <mat-card *ngFor="let exercise of exerciseWorkout,  index as i " class="exercise-card">
+          <mat-card-header>
+            <mat-card-title>
+              <h4 ng-cloak>
+                {{ exercise.nome.toUpperCase()}}
+              </h4>
+            </mat-card-title>
+            <mat-card-subtitle>{{ exercise.tipologia }}</mat-card-subtitle>
+          </mat-card-header>
+          <!-- <img mat-card-image src="#">-->
+          <mat-card-content>
+            <p>
+              {{ exercise.note }}
+            </p>
+          </mat-card-content>
+          <div [formGroup]="workoutSingleDetails(i)">
+            <mat-icon color="warn">info</mat-icon><input class="form-control-text" type="text" id="nome"
+              formControlName="ripetizioniBase" placeholder="Inserisci ripetizioni" autocomplete="off" />
+            <br />
+            <input class="form-control-text" type="text" id="note" formControlName="note" placeholder="Inserisci note"
+              autocomplete="off" />
+            <input class="form-control-text" type="text" id="note" formControlName="tempoRecupero" placeholder="Inserisci secondi recupero"
+              autocomplete="off" />
+          </div>
+          <mat-card-actions>
+            <button mat-button type="button" (click)="removeExerciseOnddWorkout(i)">
+              Rimuovi
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </table>
+
+    <button mat-raised-button class="button-inserisci-workout" type="submit" value="Inserisci workout"
+      [disabled]="!isFormValid()">
+      Inserisci workout
+    </button>
+  </form>
+</div>
+
+<!--
+<br/>  
+{{this.productForm.value | json}}  
+<br>
+<br>
+<br>
+{{this.exerciseWorkout | json}}  
+-->
