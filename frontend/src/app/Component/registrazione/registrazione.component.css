@@ -1,13 +1,6 @@
 /* BASIC */
 
-html {
-  background-color: #56baed;
-}
 
-body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
-}
 
 a {
   color: #92badd;
@@ -67,15 +60,6 @@ h2 {
   border-radius: 0 0 10px 10px;
 }
 
-/* TABS */
-h2.inactive {
-  color: #cccccc;
-}
-
-h2.active {
-  color: #0d0d0d;
-  border-bottom: 2px solid #5fbae9;
-}
 
 
 mat-form-field{
@@ -234,3 +218,5 @@ button[disabled] {
 #icon {
   width: 60%;
 }
+  
+  

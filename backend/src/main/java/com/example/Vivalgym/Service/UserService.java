@@ -19,8 +19,10 @@ public class UserService {
     }
 
     public User findUserByEmailAndPassword(String email,String password) {
+
         Optional<User> user = this.userRepository.findOneByEmailAndPassword(email,password);
         if (user.isPresent()) {
+            user.get().setPassword(null);
             return user.get();
         } else {
             return null;
@@ -35,8 +37,15 @@ public class UserService {
             return null;
         }
     }
-    public void addUser(User user) {
-        userRepository.save(user);
+    public User addUser(User user) {
+        Optional<User> userFound = this.userRepository.findByEmail(user.getEmail());
+        if (!userFound.isPresent()) {
+            userRepository.save(user);
+            return user;
+        } else {
+            return null;
+        }
+
     }
 
     public void updateUser(Integer id, User user) {

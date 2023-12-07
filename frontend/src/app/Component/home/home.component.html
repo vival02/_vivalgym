@@ -2,11 +2,16 @@
 
 <div class="responsive-grid-workout">
   <!-- Basic Card Example -->
-  <div *ngFor="let workout of workouts" class="card-workout">
-    <div class="card-workout-title"  color="warn">
-      <h4 style="vertical-align: center">{{ workout.nome.toUpperCase() }}</h4>
-    </div>
-    <span class="card-body" color="warn">
+  <mat-card *ngFor="let workout of workouts " class="exercise-card">
+    <mat-card-header class="prova"  >
+      <mat-card-title  >
+      {{ workout.nome.toUpperCase() }}
+      </mat-card-title>
+      <br>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+    <mat-card-actions class="card-body">
       <button mat-button class="button-card-body" [routerLink]="['workout', workout.idWorkout]">
         START
       </button>
@@ -16,8 +21,9 @@
       <button mat-button class="button-card-body" (click)="eliminaWorkout(workout.idWorkout)">
         ELIMINA
       </button>
-    </span>
-  </div>
+    </mat-card-actions>
+
+  </mat-card>
 </div>
 <div class="add-workout">
   <button class="aggiungi-workout-button" mat-button (click)="addWorkoutForm()">
@@ -26,7 +32,7 @@
 </div>
 
 <div class="add-workout-form" *ngIf="showAddWorkoutForm">
-  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="formAddExercise" >
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="formAddExercise">
     <button mat-icon-button (click)="addWorkoutForm()" style="float: right">
       <mat-icon>close</mat-icon>
     </button>
@@ -48,7 +54,7 @@
           <mat-card-header>
             <mat-card-title>
               <h4 ng-cloak>
-                {{ exercise.nome.toUpperCase()}}
+                {{ exercise.nomeIng.toUpperCase()}}
               </h4>
             </mat-card-title>
             <mat-card-subtitle>{{ exercise.tipologia }}</mat-card-subtitle>
@@ -58,16 +64,17 @@
             <p>
               {{ exercise.note }}
             </p>
+
+            <div [formGroup]="workoutSingleDetails(i)">
+              <mat-icon color="warn">info</mat-icon><input class="form-control-text" type="text" id="nome"
+                formControlName="ripetizioniBase" placeholder="Inserisci ripetizioni" autocomplete="off" />
+              <br />
+              <input matInput class="form-control-text" type="text" id="note" formControlName="note"
+                placeholder="Inserisci note" autocomplete="off" />
+              <input matInput class="form-control-text" type="text" id="note" formControlName="tempoRecupero"
+                placeholder="Inserisci secondi recupero" autocomplete="off" />
+            </div>
           </mat-card-content>
-          <div [formGroup]="workoutSingleDetails(i)">
-            <mat-icon color="warn">info</mat-icon><input class="form-control-text" type="text" id="nome"
-              formControlName="ripetizioniBase" placeholder="Inserisci ripetizioni" autocomplete="off" />
-            <br />
-            <input class="form-control-text" type="text" id="note" formControlName="note" placeholder="Inserisci note"
-              autocomplete="off" />
-            <input class="form-control-text" type="text" id="note" formControlName="tempoRecupero" placeholder="Inserisci secondi recupero"
-              autocomplete="off" />
-          </div>
           <mat-card-actions>
             <button mat-button type="button" (click)="removeExerciseOnddWorkout(i)">
               Rimuovi

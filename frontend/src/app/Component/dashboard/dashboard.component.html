@@ -9,9 +9,12 @@
             style="color:#d6d9de;margin-bottom: 2%;">home</mat-icon> Home</a></mat-list-item>
       <mat-list-item style="margin-bottom: 6%;"> <a routerLink="exercise" style="text-decoration: none;color:#d6d9de">
           <mat-icon style="color:#d6d9de;margin-bottom: 2%;">list</mat-icon> Esercizi</a></mat-list-item>
+     
       <mat-list-item style="margin-bottom: 6%;"> <a routerLink="storico" style="text-decoration: none;color:#d6d9de">
           <mat-icon style="color:#d6d9de;margin-bottom: 2%;">assessment</mat-icon> Storico</a></mat-list-item>
-
+      <mat-list-item style="margin-bottom: 6%;color:#d6d9de" > <a (click)="logOut()" style="text-decoration: none;color:#d6d9de">
+          <mat-icon style="color:#d6d9de;margin-bottom: 2%;">account_circle</mat-icon> Log out</a></mat-list-item>
+         
     </mat-list>
   </mat-sidenav>
   <mat-sidenav-content>

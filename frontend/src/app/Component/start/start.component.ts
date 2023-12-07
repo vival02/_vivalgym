@@ -19,7 +19,7 @@ export class StartComponent implements OnInit{
 
 
 public userLoginData:UserLoginData =  { email: '', password: '' };
-public user:User =  { idUser:null , nome: '', cognome: '',email: '', password: '',dataDiNascita:null };
+public user:User =  { idUser:null , nome: '', cognome: '',email: '',dataDiNascita:null };
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email:new FormControl(null,[Validators.required,Validators.email]),
@@ -30,17 +30,18 @@ public user:User =  { idUser:null , nome: '', cognome: '',email: '', password: '
   onSubmit(){
     this.userLoginData.email=this.loginForm.get('email').value;
     this.userLoginData.password=this.loginForm.get('password').value;
-    this.login(this.userLoginData);
+    this.login();
   }
 
   constructor(private userService:UserService,  private router: Router){}
-  public login(userLoginData:UserLoginData) : void{
+  public login() : void{
 
    this.userService.testLogin(this.userLoginData).subscribe({
       next: (res)=>{
         if(res!=null){
-          sessionStorage.setItem('User', JSON.stringify(res));
           console.log(res);
+          sessionStorage.setItem('User', JSON.stringify(res));
+         
           this.router.navigate(["/dashboard"]);
         }
         

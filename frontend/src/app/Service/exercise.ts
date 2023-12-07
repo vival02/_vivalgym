@@ -1,7 +1,15 @@
 export interface Exercise {
   idExercise: number,
   nome: string,
-  note: string ,
+  nomeIng?: string,
+  note: string,
   gruppoMuscolare: string,
-  tipologia : string
+  immagine?:string,
+  tipologia: string
+}
+
+export interface ExerciseTypes {
+  gruppoMuscolare: string,
+  immagine: string
+  linkImmagine: string
 }

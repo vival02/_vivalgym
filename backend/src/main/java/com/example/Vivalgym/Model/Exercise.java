@@ -1,5 +1,6 @@
 package com.example.Vivalgym.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -15,9 +16,11 @@ public class Exercise {
     private String nomeIng;
     private String tipologia;
     private String rating;
+    /*@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="gruppoMuscolare")
+    @JsonBackReference(value="-workout")*/
     private String gruppoMuscolare;
-    private String immagine1 ;
-    private String immagine2 ;
+    private String immagine ;
     private String descrizione;
     private String Attrezzatura;
     private String livello;
@@ -50,21 +53,15 @@ public class Exercise {
         this.rating = rating;
     }
 
-    public String getImmagine1() {
-        return immagine1;
+    public String getImmagine() {
+        return immagine;
     }
 
-    public void setImmagine1(String immagine1) {
-        this.immagine1 = immagine1;
+    public void setImmagine(String immagine1) {
+        this.immagine = immagine1;
     }
 
-    public String getImmagine2() {
-        return immagine2;
-    }
 
-    public void setImmagine2(String immagine2) {
-        this.immagine2 = immagine2;
-    }
 
     public String getLinkApprofondimento() {
         return linkApprofondimento;

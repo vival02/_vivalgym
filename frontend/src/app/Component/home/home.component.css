@@ -5,20 +5,22 @@
 
 }
 
-.card-workout-title {
-  padding: 10px 10px 0px 10px;
-  text-align: center;
-  /* orizzontale */
-  line-height: 150px;
-  /* verticale */
+.prova {
 
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 50px;
+  padding: 0px 0px 0px 0px;
   border-width: 1px 1px 1px 1px;
   border-style: solid;
   border-color: #A9CCE3;
   background-color: #AED6F1;
   border-radius: 5px 5px 0px 0px;
-
 }
+
+
 
 .card-workout {
   box-shadow: 5px 5px 5px 2px #dedede;
@@ -39,6 +41,7 @@
   align-items: center;
   justify-content: center;
 }
+
 
 .button-inserisci-workout:disabled,
 button[disabled] {
@@ -98,11 +101,17 @@ button[disabled] {
 }
 
 .exercise-card {
+  height: 50%;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  width: 100%;
-  margin: 5% 5% 5% 5%;
 
+  min-height: 70px;
+  max-width: 320px;
+  min-width: 320px;
+  margin: 2% 1% 2% 1%;
 }
+
 
 .responsive-grid {
   display: grid;

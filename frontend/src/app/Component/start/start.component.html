@@ -1,42 +1,32 @@
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
-
     <!-- Icon -->
     <div class="fadeIn first">
       <h2 style="color:black;">LOGIN</h2><br>
-      Sign In to your account
+      
     </div>
     <!-- Login Form  -->
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container">
       <mat-form-field>
-        <mat-label>Enter your email</mat-label>
-        <input matInput placeholder="pat@example.com" class="fadeIn second" formControlName="email" required
+        <mat-label>Inserisci email</mat-label>
+        <input matInput placeholder="email@example.com" class="fadeIn-second" formControlName="email" required
           autocomplete="off">
 
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <mat-label>Inserisci password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" class="fadeIn-second">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide" autocomplete="off">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
       </mat-form-field><br>
-      <button mat-raised-button type="submit" class="fadeIn fourth" [disabled]="!loginForm.valid">Login</button>
+      <button mat-raised-button type="submit" class="fadeIn-fourth" [disabled]="!loginForm.valid">Login</button>
     </form>
-
-
-    <!-- Login Form
-    <form>
-      <input type="text" id="email" class="fadeIn second" name="email" placeholder="email">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
-    </form>-->
-
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="#"> Non hai un account?</a>
+      <a class="underlineHover" routerLink="/registrazione"> Non hai un account?</a>
     </div>
 
   </div>

@@ -1,0 +1,50 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <h2 style="color:black;">REGISTRAZIONE</h2><br>
+        
+      </div>
+      <!-- Registrazione Form  -->
+      <form [formGroup]="registrazioneForm" (ngSubmit)="onSubmit()" class="login-container">
+        <mat-form-field>
+          <mat-label>Inserisci nome</mat-label>
+          <input matInput placeholder="nome" class="fadeIn-second" formControlName="nome" required
+            autocomplete="off">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Inserisci cognome</mat-label>
+          <input matInput placeholder="cognome" class="fadeIn-second" formControlName="cognome" required
+            autocomplete="off">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Inserisci data di nascita</mat-label>
+          <input matInput [matDatepicker]="picker" class="fadeIn-second" formControlName="dataDiNascita" required
+          autocomplete="off">
+       
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Inserisci email</mat-label>
+          <input matInput placeholder="email@example.com" class="fadeIn-second" formControlName="email" required
+            autocomplete="off">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Inserisci password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" class="fadeIn-second">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide" autocomplete="off">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field><br>
+        <button mat-raised-button type="submit" class="fadeIn-fourth" [disabled]="!registrazioneForm.valid">Conferma</button>
+      </form>
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" routerLink=""> Hai già un account?</a>
+      </div>
+  
+    </div>
+  </div>

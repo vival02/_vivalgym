@@ -27,7 +27,7 @@ export class AddExerciseDialogOverviewComponent implements OnInit{
   public exercises: Exercise[] = [];
  // public exerciseWorkout: Exercise[]= [];
   ngOnInit(): void {
-    console.log("chiamato")
+
     this.getExercises();
     
   }

@@ -6,6 +6,7 @@ import {StartComponent} from "./Component/start/start.component";
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { DisplayWorkoutComponent } from './Component/display-workout/display-workout.component';
 import { StoricoComponent } from './Component/storico/storico.component';
+import { RegistrazioneComponent } from './Component/registrazione/registrazione.component';
 
 const routes: Routes = [
  
@@ -36,7 +37,9 @@ const routes: Routes = [
   {
     path:"login",component:StartComponent,
   },
- 
+  {
+    path:"registrazione",component:RegistrazioneComponent,
+  },
 
   
 ];

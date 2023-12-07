@@ -18,13 +18,10 @@ public class UserController {
     private UserService userService;
     @Autowired
     private WorkoutService workoutService;
-    @GetMapping("/login")
-    public User Login(  @RequestParam(value="email") String email, @RequestParam(value="password") String password) {
-
-        return userService.findUserByEmailAndPassword(email,password);
+    @RequestMapping(value = "/login" , method = RequestMethod.PUT)
+    public User Login(  @RequestBody User user) {
+        return userService.findUserByEmailAndPassword(user.getEmail(),user.getPassword());
     }
-
-
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
@@ -42,11 +39,11 @@ public class UserController {
         return userService.getUser(id);
     }
 
-    @PostMapping("/users")
+    @PostMapping("/add-user")
     //Alternativamente
     //@RequestMapping(value = "/patient", method = RequestMethod.POST)
-    public void addUser(@RequestBody User user) {
-        userService.addUser(user);
+    public User addUser(@RequestBody User user) {
+        return userService.addUser(user);
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)

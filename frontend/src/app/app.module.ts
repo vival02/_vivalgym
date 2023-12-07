@@ -27,10 +27,12 @@ import { DialogAlert, DisplayWorkoutComponent } from './Component/display-workou
 import { MatPaginatorIntl, MatPaginatorModule, } from '@angular/material/paginator';
 import { MatTableDataSource } from "@angular/material/table";
 import { TimerComponent } from './Component/timer/timer.component';
-
+import * as $ from "jquery";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { StoricoComponent } from './Component/storico/storico.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { RegistrazioneComponent } from './Component/registrazione/registrazione.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     DisplayWorkoutComponent,
     TimerComponent,
     DialogAlert,
-    StoricoComponent
+    StoricoComponent,
+    RegistrazioneComponent
     
 
   ],
@@ -72,7 +75,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatGridListModule,
     MatPaginatorModule,
  MatProgressSpinnerModule,
- ScrollingModule
+ ScrollingModule,
+ MatDatepickerModule
   
   ],
   providers: [],

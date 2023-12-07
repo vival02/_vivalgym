@@ -270,7 +270,7 @@ export class DisplayWorkoutComponent implements OnInit {
     this.currentTempoRecupero = this.workoutDetails.at(this.dataSource.paginator.pageIndex).tempoRecupero
     this.serieSvolte=this.detailsSpecificExercise.length
   }
-
+ 
 }
 
 export interface Tile {

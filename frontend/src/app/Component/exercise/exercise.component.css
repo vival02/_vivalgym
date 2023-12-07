@@ -6,16 +6,19 @@
   min-height:70px;
   max-width: 320px;
   min-width: 320px;
-  margin: 5% 5% 5% 5%;
+  margin: 2% 1% 2% 1%;
 }
 
+.example-header-image {
+  background-size: cover;
+  max-height:50%; max-width:50%;
+}
 .responsive-grid {
-
+  flex-wrap: wrap;
   display: flex;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr) );
   align-items: center;
   justify-content: center;
-  
   /*
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

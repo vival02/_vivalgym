@@ -18,11 +18,11 @@ public class User {
     @GeneratedValue(generator = "user_gen",strategy=GenerationType.IDENTITY)
     @SequenceGenerator(name = "user_gen",sequenceName = "user_seq",initialValue =1, allocationSize = 1)
     private Integer idUser;
-    @NaturalId
+
     private String nome;
     private String cognome;
     private LocalDate dataDiNascita;
-
+    @NaturalId
     private String email;
     private String password;
     @OneToMany(mappedBy = "user",cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
@@ -105,6 +105,14 @@ public class User {
             return this.getWorkouts().size();
         }
 
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setWorkouts(Set<Workout> workouts) {

@@ -14,14 +14,17 @@ export class UserService {
     //console.log(this.apiServerUrl/patients);
     return this.http.get<User[]>(`${this.apiServerUrl}/patients`);
   }
-  public testLogin(loginData:UserLoginData):Observable<User>{
-    let params = new HttpParams()
-    .set('email',  loginData.email)
-    .set('password',  loginData.password);
+ 
+  public testLogin(loginData:User):Observable<User>{
   
-    return this.http.get<User>(`${this.apiServerUrl}/login`,{params: params});
+    return this.http.put<User>(`${this.apiServerUrl}/login`,loginData);
+  
   }
 
+  public addUser(loginData:User):Observable<User>{
   
+    return this.http.post<User>(`${this.apiServerUrl}/add-user`,loginData);
+  
+  }
 
 }

@@ -1,6 +1,7 @@
 package com.example.Vivalgym.Controller;
 
 import com.example.Vivalgym.Model.Exercise;
+import com.example.Vivalgym.Model.ExerciseTypes;
 import com.example.Vivalgym.Model.User;
 import com.example.Vivalgym.Model.Workout;
 import com.example.Vivalgym.Service.ExerciseService;
@@ -27,5 +28,8 @@ public class ExerciseController {
         System.out.println(exercise.toString());
         exerciseService.addExercise(exercise);
     }
-
+    @GetMapping("/exercise-types")
+    public List<ExerciseTypes> getAllExerciseTypes() {
+        return exerciseService.getAllExerciseTypes();
+    }
 }
