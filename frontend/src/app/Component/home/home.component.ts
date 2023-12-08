@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AddExerciseDialogOverviewComponent } from '../add-exercise-dialog-overview/add-exercise-dialog-overview.component';
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 import { Exercise } from 'src/app/Service/exercise';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -105,7 +106,7 @@ export class HomeComponent implements OnInit {
         },
         error: (HttpErrorResponse) => alert(HttpErrorResponse.message),
       });
-      this.addWorkoutForm()
+    this.addWorkoutForm()
   }
   getExercise() {
     return this.workoutDetailsList
@@ -154,16 +155,26 @@ export class HomeComponent implements OnInit {
       error: (error) => alert('Unable to get list of workouts'),
     });
   }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(AddExerciseDialogOverviewComponent, {});
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.exerciseWorkout.push(...result.data);
-      this.addQuantity(result.data);
-      this.workoutDetails();
+      if(result.data !=null){
+        this.exerciseWorkout.push(...result.data);
+        this.addQuantity(result.data);
+        this.workoutDetails();
+      }
     });
   }
-
+  openInfoRipetizioni() {
+    let stringa = 'Inserire le ripetizioni e le serie per questo specifico esercizio.\nI formati più comuni sono ad esempio : \n 4x10 ovvero 10 ripetizioni per 4 serie \n 4x10 + 10 ovvero 4 superserie \n 3 x 12 / 10 / 8 ovvero 3 superserie con cambio di ripetizioni \n'
+    this.openInfo(stringa)
+  }
+  openInfo(stringa_info: string): void {
+    const dialogRef = this.dialog.open(InfoDialogComponent, {});
+    dialogRef.componentInstance.stringa_info = stringa_info;
+  }
   thirdPartyForm: FormGroup;
 
   name = 'Angular';
@@ -186,7 +197,7 @@ export class HomeComponent implements OnInit {
       },
       minutiCardio: null,
       ripetizioniBase: '',
-      tempoRecupero:null
+      tempoRecupero: null
     });
   }
 
@@ -194,7 +205,7 @@ export class HomeComponent implements OnInit {
     for (var exercise of exercises) {
       this.idCard = this.idCard + 1;
       this.workoutDetails().push(this.newQuantity(this.idCard, exercise));
-    
+
     }
     console.log(this.workoutDetails())
   }
@@ -236,3 +247,4 @@ export class HomeComponent implements OnInit {
     console.log(idExercise);
   }
 }
+

@@ -1,11 +1,25 @@
 
 .exercise-card {
-
-    max-width: 320px;
-    margin: 5% 5% 5% 5%;
+  height: 50%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height:70px;
+  max-width: 320px;
+  min-width: 320px;
+  margin: 2% 1% 2% 1%;
   }
-  
+  .example-header-image {
+    background-size: cover;
+    max-height:50%; max-width:50%;
+  }
   .responsive-grid{
-    display: grid;
-    grid-template-columns:repeat(4,1fr);
+    flex-wrap: wrap;
+  display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr) );
+  align-items: center;
+  justify-content: center;
   }
+dialog-content{
+  height: 80%;
+}

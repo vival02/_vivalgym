@@ -1,5 +1,3 @@
-<script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
-
 <ng-template [ngIf]="!showExercise">
   <div class="responsive-grid">
     <mat-card *ngFor="let exercise of exerciseTypes " class="exercise-card">
@@ -30,10 +28,10 @@
 
 
 <ng-template [ngIf]="showExercise">
-  
-      <button mat-icon-button style="float: left;margin-left: 5%;margin-top: 2%;" (click)="showTypeExercise()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
+
+  <button mat-icon-button style="float: left;margin-left: 5%;margin-top: 2%;" (click)="showTypeExercise()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
 
 
   <div class="responsive-grid">
@@ -45,9 +43,6 @@
         <mat-card-subtitle>{{exercise.tipologia}}</mat-card-subtitle>
       </mat-card-header>
       <img [src]="exercise.immagine" class="example-header-image">
-
-
-    
       <mat-card-content>
         <p>
           {{exercise.note}}

@@ -1,16 +1,40 @@
 <h2 mat-dialog-title>Seleziona un esercizio  <button mat-button (click)="onClosed()" >Finito</button></h2> 
 <mat-dialog-content>
+<ng-template [ngIf]="!showExercise">
+  <div class="responsive-grid">
+    <mat-card *ngFor="let exercise of exerciseTypes " class="exercise-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h4>{{exercise.gruppoMuscolare.toUpperCase()}}</h4>
+        </mat-card-title>
+        <br>
+
+        <mat-card-subtitle>
+
+          <img alt="My image name" [src]="exercise.linkImmagine" />
+
+        </mat-card-subtitle>
+      </mat-card-header>
+      <!-- <img mat-card-image src="#">-->
+      <mat-card-content>
+        <p>
+
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="showExerciseGroup(exercise.gruppoMuscolare)">SEE MORE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-template>
+<ng-template [ngIf]="showExercise">
 <div class="responsive-grid">
-  
-
     <mat-card  *ngFor="let exercise of exercises" class="exercise-card"  >
-      
-
       <mat-card-header>
         <mat-card-title>  <h4>{{exercise.nomeIng.toUpperCase()}} </h4></mat-card-title>
         <mat-card-subtitle>{{exercise.tipologia}}</mat-card-subtitle>
       </mat-card-header>
-        <!-- <img mat-card-image src="#">-->
+      <img [src]="exercise.immagine" class="example-header-image">
       <mat-card-content>
         <p>
           {{exercise.note}}
@@ -19,8 +43,13 @@
       <mat-card-content>
      
     </mat-card-content>
-      <mat-card-actions>
-        <button mat-button (click)="addExerciseToWorkout(exercise)">Aggiungi</button>
+      <mat-card-actions style="width: 100%; align-items: center;
+      justify-content: center; " [style.background]="controlloExercise(exercise.idExercise) ? '#EE8680':'#DCF8D6'">
+        <ng-template [ngIf]="!controlloExercise(exercise.idExercise)"><button mat-button (click)="addExerciseToWorkout(exercise)">Aggiungi</button></ng-template>
+        <ng-template [ngIf]="controlloExercise(exercise.idExercise)"> <button mat-button (click)="removeExerciseOnddWorkout(exercise)">Rimuovi</button></ng-template>
+        
       </mat-card-actions>
     </mat-card>
 </div>
+</ng-template>
+</mat-dialog-content>

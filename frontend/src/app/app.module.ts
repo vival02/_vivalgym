@@ -33,6 +33,8 @@ import { StoricoComponent } from './Component/storico/storico.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { RegistrazioneComponent } from './Component/registrazione/registrazione.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { InfoDialogComponent } from './Component/info-dialog/info-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     TimerComponent,
     DialogAlert,
     StoricoComponent,
-    RegistrazioneComponent
+    RegistrazioneComponent,
+    InfoDialogComponent
     
 
   ],
@@ -76,7 +79,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatPaginatorModule,
  MatProgressSpinnerModule,
  ScrollingModule,
- MatDatepickerModule
+ MatDatepickerModule,
+ MatTooltipModule
   
   ],
   providers: [],
