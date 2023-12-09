@@ -23,7 +23,7 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, Ma
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { DialogAlert, DisplayWorkoutComponent } from './Component/display-workout/display-workout.component';
+import { DisplayWorkoutComponent } from './Component/display-workout/display-workout.component';
 import { MatPaginatorIntl, MatPaginatorModule, } from '@angular/material/paginator';
 import { MatTableDataSource } from "@angular/material/table";
 import { TimerComponent } from './Component/timer/timer.component';
@@ -35,6 +35,7 @@ import { RegistrazioneComponent } from './Component/registrazione/registrazione.
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { InfoDialogComponent } from './Component/info-dialog/info-dialog.component';
+import { DialogAlertComponent } from './Component/dialog-alert/dialog-alert.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,10 +45,10 @@ import { InfoDialogComponent } from './Component/info-dialog/info-dialog.compone
     AddExerciseDialogOverviewComponent,
     DisplayWorkoutComponent,
     TimerComponent,
-    DialogAlert,
     StoricoComponent,
     RegistrazioneComponent,
-    InfoDialogComponent
+    InfoDialogComponent,
+    DialogAlertComponent
     
 
   ],

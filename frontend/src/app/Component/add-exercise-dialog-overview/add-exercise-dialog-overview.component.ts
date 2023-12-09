@@ -1,12 +1,12 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { Exercise, ExerciseTypes } from "../../Service/exercise";
-import {ExerciseService} from "../../Service/exercise.service";
-import {CommonModule} from "@angular/common";
-import {MatPaginatorModule} from "@angular/material/paginator";
-import { MAT_DIALOG_DATA, MatDialogRef,MatDialog } from '@angular/material/dialog';
-import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
+import { ExerciseService } from "../../Service/exercise.service";
+import { CommonModule } from "@angular/common";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
@@ -16,91 +16,92 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./add-exercise-dialog-overview.component.css']
 })
 
-export class AddExerciseDialogOverviewComponent implements OnInit{
-  panelOpenState = false; 
-  showExercise:boolean = false
+export class AddExerciseDialogOverviewComponent implements OnInit {
+  panelOpenState = false;
+  showExercise: boolean = false
   exerciseTypes: ExerciseTypes[] = []
   public exercisesForTypes: Exercise[] = [];
-  linkImmagine: string ='./assets/Immagini/';
+  linkImmagine: string = './assets/Immagini/';
   thirdPartyForm = new FormGroup({
   });
-  
+
   public exercises: Exercise[] = [];
- // public exerciseWorkout: Exercise[]= [];
+  // public exerciseWorkout: Exercise[]= [];
   ngOnInit(): void {
 
     this.getExercises();
-     this.getExerciseTypes();
+    this.getExerciseTypes();
   }
-  public getExercises() : void{
+  public getExercises(): void {
     this.exerciseService.getExercises().subscribe({
-      next: (res)=>{
+      next: (res) => {
         this.exercises = res;
-        console.log(this.exercises);
       },
-      error:error=> alert("Unable to get list of exercises")
+      error: error => alert("Unable to get list of exercises")
     });
   }
   public getExerciseTypes(): void {
     this.exerciseService.getExerciseTypes().subscribe({
       next: (res) => {
-        console.log(res)
+
         this.exerciseTypes = res;
-        
-        //console.log(this.exercises);
+
+
       },
       error: (error) => { alert('Unable to get list of workouts') },
       complete: () => {
-        this.exerciseTypes.forEach(element => { 
+        this.exerciseTypes.forEach(element => {
           element.linkImmagine = this.linkImmagine + element.immagine
         })
-        console.log(this.exerciseTypes);
+   
 
       },
     });
-  
+
   }
-  public showTypeExercise(){
-    this.showExercise =!this.showExercise
+  public showTypeExercise() {
+    this.showExercise = !this.showExercise
   }
-  public showExerciseGroup(gruppoMuscolare:string){
-    this.showExercise =!this.showExercise
+  public showExerciseGroup(gruppoMuscolare: string) {
+    this.showExercise = !this.showExercise
     this.exercisesForTypes = this.exercises.filter(item => item.gruppoMuscolare == "Leg")
-    console.log(this.exercisesForTypes)
+  
   }
   constructor(
     private fb: FormBuilder, public dialogRef: MatDialogRef<AddExerciseDialogOverviewComponent>,
-    @Inject(MAT_DIALOG_DATA) public exerciseWorkout: Exercise[],private exerciseService:ExerciseService) {
-      dialogRef.disableClose = true;
-    }
+    @Inject(MAT_DIALOG_DATA) public exerciseWorkout: Exercise[], private exerciseService: ExerciseService) {
+    dialogRef.disableClose = true;
+  }
 
   onClosed(): void {
-    this.dialogRef.close({data:this.exerciseWorkout});
+    this.dialogRef.close({ data: this.exerciseWorkout });
   }
-  addExerciseToWorkout(exerciseSelect:Exercise): void{
+  addExerciseToWorkout(exerciseSelect: Exercise): void {
     this.exerciseWorkout = this.exerciseWorkout || [];
-      console.log(this.exerciseWorkout)
-      this.exerciseWorkout.push(exerciseSelect) 
-     
-  }
-  onSubmit():void{
+  
+    this.exerciseWorkout.push(exerciseSelect)
 
   }
+  onSubmit(): void {
+
+  }
+
   // controllo se l'esercizio è già stato aggiunto 
-  controlloExercise(idExercise):boolean{
-   if(this.exerciseWorkout!=null) {
-    if(this.exerciseWorkout.find((element) => element.idExercise==idExercise)){
-      return true;
-    }else{
-      return false;
-    }
-   }else{
+  controlloExercise(idExercise): boolean {
+    if (this.exerciseWorkout != null) {
+      if (this.exerciseWorkout.find((element) => element.idExercise == idExercise)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
       return false;
     }
 
   }
+  // rimuovo l'esercizio dalla lista (funzione chiamata dal pulsante "rimuovi")
   removeExerciseOnddWorkout(exercise: Exercise) {
-    const index =  this.exerciseWorkout.indexOf(exercise, 0);
+    const index = this.exerciseWorkout.indexOf(exercise, 0);
     this.exerciseWorkout.splice(index, 1)
     this.controlloExercise(exercise.idExercise)
 

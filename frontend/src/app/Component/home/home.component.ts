@@ -11,9 +11,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogContent } from '@angular/material/dialog';
 import { AddExerciseDialogOverviewComponent } from '../add-exercise-dialog-overview/add-exercise-dialog-overview.component';
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
+import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { Exercise } from 'src/app/Service/exercise';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -47,7 +48,7 @@ export class HomeComponent implements OnInit {
       workoutDetails: this.fb.array([]),
     });
     this.idWorkout = String(this.route.snapshot.params['idWorkout']);
-    console.log("con")
+
   }
   isFormValid(): boolean {
     return this.productForm.valid && this.exercise().length != 0;
@@ -57,7 +58,12 @@ export class HomeComponent implements OnInit {
     this.showAddWorkoutForm = false;
   }
 
-  public addWorkoutForm(): void {
+  public addWorkoutForm(close:boolean): void {
+    
+  if(close && this.exerciseWorkout.length > 0){
+      this.openDialogAlert()
+  }else{
+  
     this.exerciseWorkout.length = 0;
     this.workoutDetailsList.length = 0;
     this.workoutDetails().clear();
@@ -70,7 +76,30 @@ export class HomeComponent implements OnInit {
     this.showAddWorkoutForm = !this.showAddWorkoutForm;
     this.onModification = false;
   }
+ 
+  }
+  openDialogAlert(): void {
+
+    const dialogRef = this.dialog.open(DialogAlertComponent, {});
+    dialogRef.componentInstance.stringa_alert = "Vuoi salvare il workout?";
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == 'yes') {
+        console.log("noè")
+       if(!this.isFormValid()){
+        this.openInfo("Inserire il nome ")
+       }else{
+        this.onSubmit();
+        this.addWorkoutForm(false)
+       }
+        
+      }else if (result == 'no'){
+        this.addWorkoutForm(false)
+      }
+    });
+
+  }
   onSubmit(): void {
+  
     if (!this.onModification) {
       this.workoutService
         .addWorkoutAndExercise(this.productForm.value)
@@ -96,7 +125,7 @@ export class HomeComponent implements OnInit {
 
   }
   onSubmitOnModification(): void {
-    console.log(this.productForm.value)
+
     this.workoutService
       .updateWorkout(this.productForm.value, this.idWorkoutModify)
       .subscribe({
@@ -106,7 +135,7 @@ export class HomeComponent implements OnInit {
         },
         error: (HttpErrorResponse) => alert(HttpErrorResponse.message),
       });
-    this.addWorkoutForm()
+    this.addWorkoutForm(true)
   }
   getExercise() {
     return this.workoutDetailsList
@@ -135,7 +164,6 @@ export class HomeComponent implements OnInit {
       error: (error) => { alert('Unable to get list of workouts') },
       complete: () => {
         // Questo blocco di codice verrà eseguito quando il caricamento sarà completato
-        console.log('Data loading completed');
         this.productForm.patchValue({
           nome: nomeWorkout
         });
@@ -143,7 +171,6 @@ export class HomeComponent implements OnInit {
       },
     });
 
-    console.log(this.exerciseWorkout)
 
   }
   public getWorkouts(): void {
@@ -207,7 +234,7 @@ export class HomeComponent implements OnInit {
       this.workoutDetails().push(this.newQuantity(this.idCard, exercise));
 
     }
-    console.log(this.workoutDetails())
+  
   }
 
   getNome() {
@@ -244,7 +271,7 @@ export class HomeComponent implements OnInit {
   removeExerciseOnddWorkout(idExercise: number) {
     this.exerciseWorkout.splice(idExercise, 1)
     this.workoutDetails().removeAt(idExercise)
-    console.log(idExercise);
+   
   }
 }
 

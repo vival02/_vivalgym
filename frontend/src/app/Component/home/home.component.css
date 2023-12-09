@@ -48,12 +48,13 @@ button[disabled] {
   border: 1px solid #999999;
   background-color: #547990;
   color: white;
+  min-width: 20%;
 
 }
 
 .button-inserisci-workout {
   margin: 2% 2% 2% 2%;
-  width: 50%;
+  min-width: 20%;
 
  
 }
@@ -90,12 +91,12 @@ button[disabled] {
   margin-bottom: 2%;
   min-width: 60%;
   padding: 10px;
- 
+  width: 70%;
   background-color: #D6EAF8;
 }
 
 .add-button-exercise {
-  width: 35%;
+  min-width: 20%;
   background-color: #1A5276;
   color: white;
   margin-bottom: 1%;
@@ -146,10 +147,10 @@ mat-grid-tile {
 
 .formAddExercise-text {
 
-  width: 60%;
+  min-width: 40%;
   text-align: center;
   margin-top: 5%;
-  margin-left: 8%;
+  margin-left: 5%;
   padding: 12px 20px;
   align-items: center;
   justify-content: center;

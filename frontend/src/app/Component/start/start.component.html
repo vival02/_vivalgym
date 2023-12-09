@@ -1,33 +1,45 @@
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
-    <!-- Icon -->
-    <div class="fadeIn first">
-      <h2 style="color:black;">LOGIN</h2><br>
-      
-    </div>
-    <!-- Login Form  -->
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container">
-      <mat-form-field>
-        <mat-label>Inserisci email</mat-label>
-        <input matInput placeholder="email@example.com" class="fadeIn-second" formControlName="email" required
-          autocomplete="off">
 
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Inserisci password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" class="fadeIn-second">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide" autocomplete="off">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field><br>
-      <button mat-raised-button type="submit" class="fadeIn-fourth" [disabled]="!loginForm.valid">Login</button>
-    </form>
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" routerLink="/registrazione"> Non hai un account?</a>
-    </div>
+<mat-grid-list cols="2" rowHeight="fit"  style="height: 100%;"  class="griglia-display">
 
-  </div>
-</div>
+  <mat-grid-tile colspan="1" rowspan='3'
+    style=" margin-bottom: 5%;"><img style="" src="./assets/Immagini/panel_iniziale.png" />
+    <br></mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan='3'
+    style="margin-bottom: 5%;">
+    <div class="wrapper fadeInDown">
+    
+      <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+          <h2 style="color:black;">LOGIN</h2><br>
+          
+        </div>
+        <!-- Login Form  -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container">
+          <mat-form-field>
+            <mat-label color="black" >Inserisci email</mat-label>
+            <input matInput  placeholder="email@example.com" class="fadeIn-second" formControlName="email" required
+              autocomplete="off">
+    
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Inserisci password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" class="fadeIn-second" >
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide" autocomplete="off">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field><br>
+          <button mat-raised-button type="submit" class="fadeIn-fourth" [disabled]="!loginForm.valid">Login</button>
+        </form>
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+          <a class="underlineHover" routerLink="/registrazione"> Non hai un account?</a>
+        </div>
+    
+      </div>
+    </div>
+    <br></mat-grid-tile>
+  </mat-grid-list>
+   

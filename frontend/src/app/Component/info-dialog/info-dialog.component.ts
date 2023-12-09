@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DialogAlert } from '../display-workout/display-workout.component';
+
 
 @Component({
   selector: 'app-info-dialog',
@@ -9,6 +9,6 @@ import { DialogAlert } from '../display-workout/display-workout.component';
 
 })
 export class InfoDialogComponent {
-  constructor(public dialogRef: MatDialogRef<DialogAlert>) { }
+  constructor(public dialogRef: MatDialogRef<InfoDialogComponent>) { }
   public stringa_info: string
 }

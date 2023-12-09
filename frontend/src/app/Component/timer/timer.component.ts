@@ -10,6 +10,7 @@ import { takeWhile, tap } from 'rxjs/operators';
 })
 export class TimerComponent {
    @Input()serieSvolte: number = 0;
+   @Input() diameterSpinner:number=100;
   tempoRecupero: number = 0;
   @Input() serieRichieste: string = '';
   selected = 'option1'

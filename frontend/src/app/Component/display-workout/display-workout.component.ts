@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   OnInit,
+  VERSION,
   ViewChild,
   inject,
 } from '@angular/core';
@@ -15,6 +16,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { Router } from '@angular/router';
+import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import {
   FormGroup,
   FormControl,
@@ -48,6 +50,7 @@ export class DisplayWorkoutComponent implements OnInit {
   workoutService = inject(WorkoutService);
   ripetizionixkgArray: ripetizionixkgArray[] = []
   singleRipetizionixkgArray: ripetizionixkgArray;
+  diameterSpinner:number=100;
   workoutSession: WorkoutSession = {
     workout: {
       idWorkout: '',
@@ -63,6 +66,8 @@ export class DisplayWorkoutComponent implements OnInit {
   details: WorkoutSessionDetails[] = [];
   detailsSpecificExercise: Ripetizionixkg[] = [];
   singleDetail: WorkoutSessionDetails;
+  arrayColSpan:number[]=[3,2,1];
+
   public workout: Workout = {
     nome: '',
     note: '',
@@ -79,6 +84,27 @@ export class DisplayWorkoutComponent implements OnInit {
     tempoRecupero: 60,
     array: undefined
   };
+  ngVersion: string = VERSION.full;
+  matVersion: string = '5.1.0';
+  breakpoint: number;
+
+
+
+  
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 700) ? 1 : 3;
+    if((event.target.innerWidth <= 700)){
+      this.arrayColSpan[0]=1;
+      this.arrayColSpan[1]=1;
+      this.diameterSpinner=70;
+    }else{
+      this.arrayColSpan[0]=3;
+      this.arrayColSpan[1]=2;
+      this.diameterSpinner=100;
+    }
+    console.log(this.arrayColSpan)
+    console.log(this.breakpoint)
+  }
   currentTempoRecupero: number = 60;
   prova2(i: number): void {
 
@@ -126,7 +152,8 @@ export class DisplayWorkoutComponent implements OnInit {
     this.getWorkoutByIdWorkout();
     this.getWorkoutDetailsByIdWorkout();
     const DATA: WorkoutDetails[] = this.workoutDetails;
-
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 3;
+    console.log(this.breakpoint)
 
   }
   getTempoRecupero() {
@@ -152,7 +179,7 @@ export class DisplayWorkoutComponent implements OnInit {
 
   openDialog(): void {
     const config = new MatDialogContent();
-    const dialogRef = this.dialog.open(DialogAlert, { disableClose: true });
+    const dialogRef = this.dialog.open(DialogAlertComponent, { disableClose: true });
     dialogRef.componentInstance.stringa_alert = "Vuoi salvare questo allenamento?";
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -278,13 +305,4 @@ export interface Tile {
   cols: number;
   rows: number;
   text: string;
-}
-@Component({
-  selector: 'dialog-alert',
-  templateUrl: 'dialog-alert.html',
-
-})
-export class DialogAlert {
-  constructor(public dialogRef: MatDialogRef<DialogAlert>) { }
-  public stringa_alert: string
 }

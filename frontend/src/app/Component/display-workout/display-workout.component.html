@@ -1,56 +1,55 @@
-<div class="div-button-fine-allenamento"><button mat-button class="button-fine-allenamento"
+<div class="div-button-fine-allenamento"><button mat-button color="warn" class="button-fine-allenamento"
     (click)="addWorkoutSession()">FINE ALLENAMENTO</button></div><br>
-<mat-grid-list cols="3" rowHeight="fit" style="  height: 83%; ">
+<mat-grid-list [cols]="breakpoint" rowHeight="fit" class="griglia-display" (window:resize)="onResize($event)">
 
-  <mat-grid-tile colspan='3' rowspan='1' style="background-color: #D6EAF8;"><app-timer [serieSvolte]="serieSvolte" [serieRichieste]="serieRichieste"></app-timer>
+  <mat-grid-tile [colspan]="arrayColSpan[0]" rowspan='1'
+    style="background-color: #D6EAF8;min-height:200px ;margin-bottom: 5%;"><app-timer [serieSvolte]="serieSvolte"
+      [serieRichieste]="serieRichieste" [diameterSpinner]="diameterSpinner"> </app-timer>
     <br></mat-grid-tile>
 
-  <mat-grid-tile colspan='2' rowspan='2' style=" padding-bottom: 0%;">
+  <mat-grid-tile [colspan]="arrayColSpan[1]" rowspan='2' style=" background-color: rebeccapurple;top: 365px;">
     <mat-paginator class="paginator" #paginator [pageSize]="pageSize" hidePageSize="true"
       (page)="handlePageEvent($event)">
     </mat-paginator>
     <mat-card *ngFor="let card of obs | async, index as i" class="exercise-card">
-      <mat-card-header>
+
+      <mat-card-header style="background-color:  #b3e5fc;">
         <mat-card-title>
           <h4>{{ card.exercise.nomeIng.toUpperCase() }}</h4>
         </mat-card-title>
         <mat-card-subtitle>{{ prova.ripetizioniBase }}</mat-card-subtitle>
       </mat-card-header>
-      <!-- <img mat-card-image src="#">-->
+      <!-- <img mat-card-image src="#">-->.
+
       <mat-card-content>
         <p>
           {{ prova.note }}
         </p>
       </mat-card-content>
-      <mat-card-actions>
-        <div class="container">
-          <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()" class="form-exercise-details">
-            <br />
-            <tr>
-              <td>
-                <input type="text" formControlName="kg" class="form-control" placeholder="kg" autocomplete="off" />
-              </td>
-              <td>
-                <input type="text" id="ripetizioni" formControlName="ripetizioni" class="form-control"
-                  placeholder="ripetizioni" autocomplete="off" />
-              </td>
-              <td>
-              </td>
-              <button mat-icon-button color="warn" type="submit" class="btn btn-primary">
-                <mat-icon>add_circle_outline</mat-icon>
-              </button>
-          </form>
-          <br />
-        </div>
+      <mat-card-actions style="width: 100%; height: 100%;">
+        <img [src]=" card.exercise.immagine" class="example-header-image">
+        <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()" class="form-exercise-details" class="form-ripetizioni" >
+          <mat-list>  <mat-list-item style="height: 70%;">
+            <h4 style="margin-top: 2%; margin-bottom: 2%;" *ngIf="!exerciseForm.valid"> INSERIRE KG E RIPETIZIONI</h4>
+           <input matInput type="text" formControlName="kg" class="form-control" placeholder="kg"
+                autocomplete="off"  required />     <input matInput type="text" id="ripetizioni"
+                formControlName="ripetizioni" class="form-control" placeholder="ripetizioni" autocomplete="off"
+                required /> </mat-list-item><mat-list-item >
+          <button mat-raised-button color="primary" type="submit" [disabled]="!exerciseForm.valid"
+                matTooltip="completare i campi kg e ripetizioni">
+                INSERISCI
+              </button> </mat-list-item> </mat-list> 
+        </form>
       </mat-card-actions>
+
     </mat-card>
   </mat-grid-tile>
 
-  <mat-grid-tile colspan='1' rowspan='2' class="col-storico-esercizi">
-    <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
-      <p>STORICO ESERCIZIO</p>
-      <div *ngFor="let exercise of detailsSpecificExercise, index as i"> {{exercise.kg}}Kg x {{exercise.ripetizioni}}
-        ripetizioni</div>
+  <mat-grid-tile [colspan]="arrayColSpan[2]" rowspan='2' class="col-storico-esercizi">
+    <cdk-virtual-scroll-viewport itemSize="10" class="example-viewport" style="background-color: #D6EAF8;">
+      <h3 style="margin-top: 5%;">STORICO RIPETIZIONI </h3>
+      <div *ngFor="let exercise of detailsSpecificExercise, index as i"> <h4> {{exercise.kg}}Kg x {{exercise.ripetizioni}}
+        ripetizioni</h4></div>
     </cdk-virtual-scroll-viewport>
   </mat-grid-tile>
 </mat-grid-list>

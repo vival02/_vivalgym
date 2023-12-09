@@ -18,6 +18,7 @@ public class Application {
 	}
 	@Bean
 	public CorsFilter corsFilter() {
+		/*http://localhost:4200*/
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
 		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
