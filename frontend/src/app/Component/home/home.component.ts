@@ -58,56 +58,60 @@ export class HomeComponent implements OnInit {
     this.showAddWorkoutForm = false;
   }
 
-  public addWorkoutForm(close:boolean): void {
-    
-  if(close && this.exerciseWorkout.length > 0){
-      this.openDialogAlert()
-  }else{
-  
-    this.exerciseWorkout.length = 0;
-    this.workoutDetailsList.length = 0;
-    this.workoutDetails().clear();
-    this.productForm.reset();
-    this.productForm.patchValue({
-      user: {
-        idUser: this.user.idUser,
-      },
-    });
-    this.showAddWorkoutForm = !this.showAddWorkoutForm;
-    this.onModification = false;
-  }
- 
-  }
-  openDialogAlert(): void {
+  public addWorkoutForm(close: boolean): void {
+    // controllo se l'utente vuole chiudere il form di modifica e se ci sono esercizi inseriti
+    if (close && this.exerciseWorkout.length > 0 && !this.onModification) {
+      // se ci sono apro dialogAlert e chiedo se vuole salvare il workout
+      this.openDialogAlert("Vuoi salvare il workout?").then((result) => {
+        if (result == 'yes') {
+          if (!this.isFormValid()) {
+            this.openInfo("Inserire il nome ")
+          } else {
+            this.onSubmit();
+           
+          }
+        } else if (result == 'no') {
+          this.addWorkoutForm(false)
+        }
+      });
 
-    const dialogRef = this.dialog.open(DialogAlertComponent, {});
-    dialogRef.componentInstance.stringa_alert = "Vuoi salvare il workout?";
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result == 'yes') {
-        console.log("noè")
-       if(!this.isFormValid()){
-        this.openInfo("Inserire il nome ")
-       }else{
-        this.onSubmit();
-        this.addWorkoutForm(false)
-       }
-        
-      }else if (result == 'no'){
-        this.addWorkoutForm(false)
-      }
-    });
+    } else {
+
+      this.exerciseWorkout.length = 0;
+      this.workoutDetailsList.length = 0;
+      this.workoutDetails().clear();
+      this.productForm.reset();
+      this.productForm.patchValue({
+        user: {
+          idUser: this.user.idUser,
+        },
+      });
+      this.showAddWorkoutForm = !this.showAddWorkoutForm;
+      this.onModification = false;
+    }
 
   }
+
+  openDialogAlert(stringa_alert: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const dialogRef = this.dialog.open(DialogAlertComponent, {});
+      dialogRef.componentInstance.stringa_alert = stringa_alert;
+
+      dialogRef.afterClosed().subscribe((result) => {
+        resolve(result);
+      });
+    });
+  }
+
+
   onSubmit(): void {
-  
+
     if (!this.onModification) {
       this.workoutService
         .addWorkoutAndExercise(this.productForm.value)
         .subscribe({
           next: (res) => {
             this.getWorkouts();
-
-            // addForm.reset();
           },
           error: (HttpErrorResponse) => alert(HttpErrorResponse.message),
         });
@@ -116,8 +120,6 @@ export class HomeComponent implements OnInit {
       this.workoutDetails().clear();
       this.productForm.reset();
       this.showAddWorkoutForm = false;
-
-
     } else {
       this.onSubmitOnModification();
     }
@@ -150,20 +152,16 @@ export class HomeComponent implements OnInit {
 
     this.workoutService.getWorkoutDetailByIdWorkout(idWorkout).subscribe({
       next: (res) => {
-        // provare ad aggiumgere i campi mancanti nell'interface di workoutdetails !!!!!!
-
         this.workoutDetailsList.push(...res);
         this.workoutDetailsList.forEach(element => {
           this.exerciseWorkout.push(element.exercise)
 
         });
         this.addQuantity(this.exerciseWorkout);
-        // this.showAddWorkoutForm = true;
 
       },
       error: (error) => { alert('Unable to get list of workouts') },
       complete: () => {
-        // Questo blocco di codice verrà eseguito quando il caricamento sarà completato
         this.productForm.patchValue({
           nome: nomeWorkout
         });
@@ -187,7 +185,7 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(AddExerciseDialogOverviewComponent, {});
 
     dialogRef.afterClosed().subscribe((result) => {
-      if(result.data !=null){
+      if (result.data != null) {
         this.exerciseWorkout.push(...result.data);
         this.addQuantity(result.data);
         this.workoutDetails();
@@ -234,7 +232,7 @@ export class HomeComponent implements OnInit {
       this.workoutDetails().push(this.newQuantity(this.idCard, exercise));
 
     }
-  
+
   }
 
   getNome() {
@@ -256,7 +254,9 @@ export class HomeComponent implements OnInit {
   }
 
   eliminaWorkout(idWorkout: string) {
-    this.workoutService
+    this.openDialogAlert("Vuoi eliminare il workout?").then((result) => {
+      if (result == 'yes') {
+        this.workoutService
       .deleteWorkout(idWorkout)
       .subscribe({
         next: (res) => {
@@ -266,12 +266,15 @@ export class HomeComponent implements OnInit {
         },
         error: (HttpErrorResponse) => alert(HttpErrorResponse.message),
       });
+      }
+    });
+   
 
   }
   removeExerciseOnddWorkout(idExercise: number) {
     this.exerciseWorkout.splice(idExercise, 1)
     this.workoutDetails().removeAt(idExercise)
-   
+
   }
 }
 

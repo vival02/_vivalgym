@@ -39,6 +39,7 @@ public class WorkoutSessionController {
 
     @PostMapping("/add-workout-session-and-details")
     public void addWorkoutAndExercise(@RequestBody WorkoutSession workoutSession ) {
+        System.out.println("-------- ok" +workoutSession.getDataSvolgimento());
         Set<WorkoutSessionDetails> workoutSessionDetails = workoutSession.getWorkoutSessionDetails();
         workoutSessionService.addWorkoutSession(workoutSession);
     }

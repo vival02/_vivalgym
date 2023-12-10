@@ -31,7 +31,7 @@
 <div class="responsive-grid">
     <mat-card  *ngFor="let exercise of exercises" class="exercise-card"  >
       <mat-card-header>
-        <mat-card-title>  <h4>{{exercise.nomeIng.toUpperCase()}} </h4></mat-card-title>
+        <mat-card-title>  <h4>{{exercise.nome.toUpperCase()}} </h4></mat-card-title>
         <mat-card-subtitle>{{exercise.tipologia}}</mat-card-subtitle>
       </mat-card-header>
       <img [src]="exercise.immagine" class="example-header-image">

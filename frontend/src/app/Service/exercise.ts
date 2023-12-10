@@ -5,7 +5,8 @@ export interface Exercise {
   note: string,
   gruppoMuscolare: string,
   immagine?:string,
-  tipologia: string
+  tipologia: string,
+  attrezzatura?:string
 }
 
 export interface ExerciseTypes {

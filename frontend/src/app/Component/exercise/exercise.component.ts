@@ -7,6 +7,7 @@ import { CommonModule } from "@angular/common";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
 
 @Component({
@@ -25,7 +26,7 @@ showExercise:boolean = false
   linkImmagine: string ='./assets/Immagini/';
   public exercises: Exercise[] = [];
   public exercisesForTypes: Exercise[] = [];
-  constructor(private exerciseService: ExerciseService,private el: ElementRef) { }
+  constructor(private exerciseService: ExerciseService,private el: ElementRef,public dialog: MatDialog) { }
   ngOnInit(): void {
     this.getExercises();
     this.getExerciseTypes();
@@ -47,8 +48,11 @@ showExercise:boolean = false
   }
   public showExerciseGroup(gruppoMuscolare:string){
     this.showExercise =!this.showExercise
-    this.exercisesForTypes = this.exercises.filter(item => item.gruppoMuscolare == "Leg")
-    console.log(this.exercisesForTypes)
+    gruppoMuscolare.toLowerCase()
+
+
+    this.exercisesForTypes = this.exercises.filter(item => item.gruppoMuscolare.includes(gruppoMuscolare.charAt(0).toUpperCase() + gruppoMuscolare.slice(1)) )
+    console.log("ff " +gruppoMuscolare)
   }
   public getExerciseTypes(): void {
     this.exerciseService.getExerciseTypes().subscribe({
@@ -70,4 +74,28 @@ showExercise:boolean = false
   
   }
   
+  openDialog(exercise:Exercise): void {
+    const config = new MatDialogContent();
+    const dialogRef = this.dialog.open(DialogExerciseDettagliComponent);
+    dialogRef.componentInstance.exercise =exercise;
+
+
+
+
+  }
 }
+
+@Component({
+  selector: 'app-dialog-exercise-dettagli',
+  templateUrl: 'dialog-exercise-dettagli.component.html',
+  
+})
+export class DialogExerciseDettagliComponent {
+  constructor(public dialogRef: MatDialogRef<DialogExerciseDettagliComponent>) { }
+  public exercise: Exercise
+
+
+
+
+}
+

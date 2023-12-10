@@ -11,7 +11,7 @@ import { HomeComponent } from './Component/home/home.component';
 import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import {ExerciseComponent} from "./Component/exercise/exercise.component";
+import {DialogExerciseDettagliComponent, ExerciseComponent} from "./Component/exercise/exercise.component";
 import {HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { StartComponent } from './Component/start/start.component';
@@ -36,6 +36,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { InfoDialogComponent } from './Component/info-dialog/info-dialog.component';
 import { DialogAlertComponent } from './Component/dialog-alert/dialog-alert.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import { DialogAlertComponent } from './Component/dialog-alert/dialog-alert.comp
     StoricoComponent,
     RegistrazioneComponent,
     InfoDialogComponent,
-    DialogAlertComponent
+    DialogAlertComponent,
+    DialogExerciseDettagliComponent
     
 
   ],
@@ -81,7 +83,8 @@ import { DialogAlertComponent } from './Component/dialog-alert/dialog-alert.comp
  MatProgressSpinnerModule,
  ScrollingModule,
  MatDatepickerModule,
- MatTooltipModule
+ MatTooltipModule,
+
   
   ],
   providers: [],

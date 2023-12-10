@@ -1,40 +1,38 @@
 <mat-toolbar color="primary">
-    <p>STORICO ALLENAMENTI</p>
+  <p>STORICO ALLENAMENTI</p>
 </mat-toolbar>
-
-
-
 <div class="exercise-container">
 
-    <mat-expansion-panel *ngFor="let allenamento of workoutSessions, index as i " class="exercise-panel">
-        <mat-expansion-panel-header  [collapsedHeight]="'120px'" class="header">
-            <mat-panel-title>{{allenamento.nome}} <br> {{allenamento.dataSvolgimento}}</mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>ESERCIZI SVOLTI {{allenamento.idWorkoutSession}}</p>
-        <div class="responsive-grid" >
-            <ng-container *ngFor= "let exercise of allenamento.workoutSessionDetails" class="responsive-grid">
-               <mat-list>
-                <mat-card  class="exercise-card" >
-                        <mat-card-header>
-                      <mat-card-title>  <h4>{{exercise.exercise.nome.toUpperCase()}} </h4></mat-card-title>
-                      <mat-card-subtitle>{{exercise.exercise.tipologia}}</mat-card-subtitle>
-                    </mat-card-header >
-                     <!-- <img mat-card-image src="#">-->
-                    <mat-card-content>
-                      <p *ngFor= "let ripetizionixkg of exercise.ripetizionixkgJson">
+  <mat-expansion-panel *ngFor="let allenamento of workoutSessions, index as i " class="exercise-panel">
+    <mat-expansion-panel-header [collapsedHeight]="'120px'" class="header">
+      <mat-panel-title>{{allenamento.nome}} <br> {{allenamento.dataSvolgimento}}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>ESERCIZI SVOLTI</p>
+    <div class="responsive-grid">
+      <ng-container *ngFor="let exercise of allenamento.workoutSessionDetails" class="responsive-grid">
+        <mat-list>
+          <mat-card class="exercise-card">
+            <mat-card-header>
+              <mat-card-title>
+                <h4>{{exercise.exercise.nome.toUpperCase()}} </h4>
+              </mat-card-title>
+              <mat-card-subtitle>{{exercise.exercise.tipologia}}</mat-card-subtitle>
+            </mat-card-header>
+            <!-- <img mat-card-image src="#">-->
+            <mat-card-content>
+              <p *ngFor="let ripetizionixkg of exercise.ripetizionixkgJson">
 
-                        {{ripetizionixkg.kilogrammi}}Kg x {{ripetizionixkg.ripetizioni}} ripetizioni
-                      </p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                     
-                     <!--<button mat-button>SEE MORE</button>--> 
-                    </mat-card-actions>
-                  </mat-card>
-    </mat-list>
-            </ng-container>
-        </div>
-    </mat-expansion-panel>
+                {{ripetizionixkg.kilogrammi}}Kg x {{ripetizionixkg.ripetizioni}} ripetizioni
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+
+              <!--<button mat-button>SEE MORE</button>-->
+            </mat-card-actions>
+          </mat-card>
+        </mat-list>
+      </ng-container>
+    </div>
+  </mat-expansion-panel>
 
 </div>
-

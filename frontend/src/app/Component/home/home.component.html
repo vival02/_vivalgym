@@ -42,8 +42,9 @@
         placeholder="NOME WORKOUT" required autocomplete="off" />
 
       <ng-template [ngIf]="!isFormValid()" style="float: center;">
-        <p style="margin-top: 1%;">Inserisci il nome e almeno un esercizio</p>
+        <p >Inserisci il nome e almeno un esercizio</p>
       </ng-template>
+      <br>
       <button mat-raised-button class="add-button-exercise" (click)="openDialog()"  type="button">
         Aggiungi esercizio
       </button>
@@ -53,7 +54,7 @@
             <mat-card-header>
               <mat-card-title>
                 <h4 ng-cloak>
-                  {{ exercise.nomeIng.toUpperCase()}}
+                  {{ exercise.nome.toUpperCase()}}
                 </h4>
               </mat-card-title>
               <mat-card-subtitle>{{ exercise.tipologia }}</mat-card-subtitle>
@@ -83,7 +84,7 @@
           </mat-card>
         
       </mat-dialog-content>
-      <button mat-raised-button class="button-inserisci-workout" type="submit" click="onSubmit()"  value="Inserisci workout"
+      <button mat-raised-button class="button-inserisci-workout" type="submit" (click)="onSubmit()"  value="Inserisci workout"
         [disabled]="!isFormValid()">
         Inserisci workout
       </button>

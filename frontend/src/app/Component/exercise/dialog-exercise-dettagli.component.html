@@ -1,0 +1,13 @@
+
+<h2 mat-dialog-title>{{exercise.nome.toUpperCase()}} </h2> 
+<mat-dialog-content style="align-items: center;
+justify-content: center;
+text-align: center;">
+    <h4 style="align-items: center;"> {{exercise.nomeIng.toUpperCase()}}</h4>
+    <img alt="My image name" [src]="exercise.immagine" />
+    <br> 
+
+      <li style=" font-weight: bold;"> Muscoli principali:  {{exercise.gruppoMuscolare}}</li> 
+      <li style=" font-weight: bold;">Attrezzatura:  {{exercise.attrezzatura}}</li> 
+</mat-dialog-content>
+

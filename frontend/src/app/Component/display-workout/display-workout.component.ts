@@ -174,6 +174,7 @@ export class DisplayWorkoutComponent implements OnInit {
     var n = new Date();
     var data =
       n.getMonth() + 1 + '/' + n.getDate() + '/' + n.getFullYear() + ' ' + n.getHours() + ':' + n.getMinutes();
+      console.log(data)
     return data;
   }
 
