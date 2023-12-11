@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
+// componente Dialog per conferma azione 
 @Component({
   selector: 'app-dialog-alert',
   templateUrl: './dialog-alert.component.html',

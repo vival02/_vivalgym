@@ -2,11 +2,9 @@
   padding: 10px 10px 10px 10px;
   display: block;
   margin: 0 auto;
-
 }
 
 .prova {
-
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -20,8 +18,6 @@
   border-radius: 5px 5px 0px 0px;
 }
 
-
-
 .card-workout {
   box-shadow: 5px 5px 5px 2px #dedede;
   border-bottom: 1px solid;
@@ -33,15 +29,12 @@
 }
 
 .responsive-grid-workout {
-
   flex-wrap: wrap;
   display: flex;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-
   align-items: center;
   justify-content: center;
 }
-
 
 .button-inserisci-workout:disabled,
 button[disabled] {
@@ -49,21 +42,26 @@ button[disabled] {
   background-color: #547990;
   color: white;
   min-width: 20%;
-
 }
 
 .button-inserisci-workout {
   margin: 2% 2% 2% 2%;
   min-width: 20%;
+}
 
- 
+.avviso_workout {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 5%;
+  background-color: #b3e5fc;
+  width: 100%;
+  height: 50%;
 }
 
 .aggiungi-workout-button {
   margin-top: 3%;
-
 }
-
 
 .add-workout button {
   display: inline;
@@ -78,7 +76,6 @@ button[disabled] {
   align-items: center;
   width: 100%;
   margin: auto;
-
 }
 
 .add-workout-form {
@@ -116,16 +113,14 @@ button[disabled] {
 
 
 .responsive-grid {
-
-padding-top: 2px;
-padding-bottom:2px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   flex-wrap: wrap;
   display: flex;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 24px;
   align-items: center;
   justify-content: center;
-
 }
 
 mat-grid-tile {
@@ -138,7 +133,6 @@ mat-grid-tile {
   margin-top: 2%;
   float: center;
   padding: 12px 20px;
-
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -146,7 +140,6 @@ mat-grid-tile {
 
 
 .formAddExercise-text {
-
   min-width: 40%;
   text-align: center;
   margin-top: 5%;
@@ -159,27 +152,21 @@ mat-grid-tile {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-
 }
 
 .button-card-body {
   margin: 5px 5px 5px 5px;
 }
 
-.formAddExercise{
+.formAddExercise {
   position: relative;
   align-items: center;
   justify-content: center;
   text-align: center;
   width: 100%;
   height: 100%;
-
-
-
 }
 
-
 body {
-
   background-color: #E4E7EA;
 }

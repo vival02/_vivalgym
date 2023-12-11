@@ -1,15 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { Exercise, ExerciseTypes } from "../../Service/exercise";
 import { ExerciseService } from "../../Service/exercise.service";
-import { CommonModule } from "@angular/common";
-import { MatPaginatorModule } from "@angular/material/paginator";
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-
+// componente per selezionare gli esercizi da inserire nel workout
 @Component({
   selector: 'app-add-exercise-dialog-overview',
   templateUrl: './add-exercise-dialog-overview.component.html',
@@ -17,21 +12,19 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 
 export class AddExerciseDialogOverviewComponent implements OnInit {
-  panelOpenState = false;
-  showExercise: boolean = false
-  exerciseTypes: ExerciseTypes[] = []
-  public exercisesForTypes: Exercise[] = [];
-  linkImmagine: string = './assets/Immagini/';
-  thirdPartyForm = new FormGroup({
-  });
+  showExercise: boolean = false // variabile per visualizzare gli esercizi di un gruppo muscolare
+  exerciseTypes: ExerciseTypes[] = [] // elenco gruppi muscolari
+  public exercisesForTypes: Exercise[] = [];  // esercizi di uno specifico gruppo muscolare
+  linkImmagine: string = './assets/Immagini/'; // link immagine gruppi muscolari 
+  thirdPartyForm = new FormGroup({});
+  public exercises: Exercise[] = []; // elenco di tutti gli esercizi 
 
-  public exercises: Exercise[] = [];
-  // public exerciseWorkout: Exercise[]= [];
   ngOnInit(): void {
-
     this.getExercises();
     this.getExerciseTypes();
   }
+
+  // get elenco completo degli esercizi dal Server 
   public getExercises(): void {
     this.exerciseService.getExercises().subscribe({
       next: (res) => {
@@ -40,33 +33,33 @@ export class AddExerciseDialogOverviewComponent implements OnInit {
       error: error => alert("Unable to get list of exercises")
     });
   }
+
+  // Get elenco gruppi muscolari dal Server 
   public getExerciseTypes(): void {
     this.exerciseService.getExerciseTypes().subscribe({
       next: (res) => {
-
         this.exerciseTypes = res;
-
-
       },
       error: (error) => { alert('Unable to get list of workouts') },
       complete: () => {
         this.exerciseTypes.forEach(element => {
           element.linkImmagine = this.linkImmagine + element.immagine
         })
-   
-
       },
     });
-
   }
+
   public showTypeExercise() {
     this.showExercise = !this.showExercise
   }
+
+  // Filtre esercizi in base al gruppo muscolare 
   public showExerciseGroup(gruppoMuscolare: string) {
     this.showExercise = !this.showExercise
-    this.exercisesForTypes = this.exercises.filter(item => item.gruppoMuscolare == "Leg")
-  
+    this.exercisesForTypes = this.exercises.filter(item => item.gruppoMuscolare.includes(gruppoMuscolare.charAt(0).toUpperCase() + gruppoMuscolare.slice(1)))
+
   }
+
   constructor(
     private fb: FormBuilder, public dialogRef: MatDialogRef<AddExerciseDialogOverviewComponent>,
     @Inject(MAT_DIALOG_DATA) public exerciseWorkout: Exercise[], private exerciseService: ExerciseService) {
@@ -76,14 +69,11 @@ export class AddExerciseDialogOverviewComponent implements OnInit {
   onClosed(): void {
     this.dialogRef.close({ data: this.exerciseWorkout });
   }
+
+  // aggiunge l'esercizio selezionato al workout
   addExerciseToWorkout(exerciseSelect: Exercise): void {
     this.exerciseWorkout = this.exerciseWorkout || [];
-  
     this.exerciseWorkout.push(exerciseSelect)
-
-  }
-  onSubmit(): void {
-
   }
 
   // controllo se l'esercizio è già stato aggiunto 
@@ -97,14 +87,14 @@ export class AddExerciseDialogOverviewComponent implements OnInit {
     } else {
       return false;
     }
-
   }
+
   // rimuovo l'esercizio dalla lista (funzione chiamata dal pulsante "rimuovi")
   removeExerciseOnddWorkout(exercise: Exercise) {
     const index = this.exerciseWorkout.indexOf(exercise, 0);
     this.exerciseWorkout.splice(index, 1)
     this.controlloExercise(exercise.idExercise)
-
   }
+  
 }
 

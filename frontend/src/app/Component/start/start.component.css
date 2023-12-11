@@ -91,7 +91,7 @@ input[type=button]:hover,
 input[type=submit]:hover,
 input[type=reset]:hover {
   background-color: #39ace7;
-  margin-bottom: 2%;
+  margin-bottom: 3%;
 }
 
 input[type=button]:active,
@@ -109,7 +109,10 @@ button[disabled] {
 
   margin-bottom: 3%;
 }
-
+.fadeIn-fourth{
+  
+  margin-bottom: 3%;
+}
 
 
 

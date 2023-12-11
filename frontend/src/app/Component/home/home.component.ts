@@ -1,17 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { WorkoutService } from '../../Service/workout.service';
 import { Workout } from '../../Service/workout';
-import { WorkoutDetails } from '../../Service/workout';
 import { WorkoutDetailsForExercise } from '../../Service/workout';
 import { User } from '../../Service/user';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { MatDialog, MatDialogContent } from '@angular/material/dialog';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { AddExerciseDialogOverviewComponent } from '../add-exercise-dialog-overview/add-exercise-dialog-overview.component';
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
@@ -34,11 +27,8 @@ export class HomeComponent implements OnInit {
   public workoutDetailsList: WorkoutDetailsForExercise[] = [];
   private user: User = JSON.parse(sessionStorage.getItem('User'));
   public onModification: boolean = false;
-  constructor(
-    private workoutService: WorkoutService,
-    public fb: FormBuilder,
-    public dialog: MatDialog
-  ) {
+  productForm!: FormGroup;
+  constructor(private workoutService: WorkoutService, public fb: FormBuilder, public dialog: MatDialog) {
     this.productForm = this.fb.group({
       user: {
         idUser: this.user.idUser,
@@ -48,11 +38,13 @@ export class HomeComponent implements OnInit {
       workoutDetails: this.fb.array([]),
     });
     this.idWorkout = String(this.route.snapshot.params['idWorkout']);
-
   }
+
+  // controllo Form inserimento/modifica workout 
   isFormValid(): boolean {
     return this.productForm.valid && this.exercise().length != 0;
   }
+
   ngOnInit(): void {
     this.getWorkouts();
     this.showAddWorkoutForm = false;
@@ -68,15 +60,12 @@ export class HomeComponent implements OnInit {
             this.openInfo("Inserire il nome ")
           } else {
             this.onSubmit();
-           
           }
         } else if (result == 'no') {
           this.addWorkoutForm(false)
         }
       });
-
     } else {
-
       this.exerciseWorkout.length = 0;
       this.workoutDetailsList.length = 0;
       this.workoutDetails().clear();
@@ -92,20 +81,19 @@ export class HomeComponent implements OnInit {
 
   }
 
+  // apertura dialog per conferma azione
   openDialogAlert(stringa_alert: string): Promise<string> {
     return new Promise((resolve, reject) => {
       const dialogRef = this.dialog.open(DialogAlertComponent, {});
       dialogRef.componentInstance.stringa_alert = stringa_alert;
-
       dialogRef.afterClosed().subscribe((result) => {
         resolve(result);
       });
     });
   }
 
-
+  // Inserimento workout (server)
   onSubmit(): void {
-
     if (!this.onModification) {
       this.workoutService
         .addWorkoutAndExercise(this.productForm.value)
@@ -115,7 +103,6 @@ export class HomeComponent implements OnInit {
           },
           error: (HttpErrorResponse) => alert(HttpErrorResponse.message),
         });
-
       this.exerciseWorkout.length = 0;
       this.workoutDetails().clear();
       this.productForm.reset();
@@ -123,42 +110,37 @@ export class HomeComponent implements OnInit {
     } else {
       this.onSubmitOnModification();
     }
-
-
   }
-  onSubmitOnModification(): void {
 
+  // modifica workout (server)
+  onSubmitOnModification(): void {
     this.workoutService
       .updateWorkout(this.productForm.value, this.idWorkoutModify)
       .subscribe({
         next: (res) => {
           this.getWorkouts();
-
         },
         error: (HttpErrorResponse) => alert(HttpErrorResponse.message),
       });
     this.addWorkoutForm(true)
   }
-  getExercise() {
-    return this.workoutDetailsList
-  }
-  public modifyWorkout(idWorkout: string, nomeWorkout: string): void {
 
+  //funzione chiamata dal pulsante "modifica" di un workout 
+  // apertura form per modifica
+  public modifyWorkout(idWorkout: string, nomeWorkout: string): void {
     this.idWorkoutModify = idWorkout;
     this.onModification = true;
     this.exerciseWorkout.length = 0;
     this.workoutDetailsList.length = 0;
     this.workoutDetails().clear();
-
+    // get per dettagli specifico esercizio (service)
     this.workoutService.getWorkoutDetailByIdWorkout(idWorkout).subscribe({
       next: (res) => {
         this.workoutDetailsList.push(...res);
         this.workoutDetailsList.forEach(element => {
           this.exerciseWorkout.push(element.exercise)
-
         });
         this.addQuantity(this.exerciseWorkout);
-
       },
       error: (error) => { alert('Unable to get list of workouts') },
       complete: () => {
@@ -168,22 +150,21 @@ export class HomeComponent implements OnInit {
         this.showAddWorkoutForm = true;
       },
     });
-
-
   }
+
+  // get tutti workout inseriti dall'utente (service)
   public getWorkouts(): void {
     this.workoutService.getWorkouts(this.user.idUser).subscribe({
       next: (res) => {
         this.workouts = res;
-
       },
       error: (error) => alert('Unable to get list of workouts'),
     });
   }
 
+  // apertura dialog per selezionare gli esercizi da inserire nel workout
   openDialog(): void {
     const dialogRef = this.dialog.open(AddExerciseDialogOverviewComponent, {});
-
     dialogRef.afterClosed().subscribe((result) => {
       if (result.data != null) {
         this.exerciseWorkout.push(...result.data);
@@ -192,19 +173,18 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
   openInfoRipetizioni() {
     let stringa = 'Inserire le ripetizioni e le serie per questo specifico esercizio.\nI formati più comuni sono ad esempio : \n 4x10 ovvero 10 ripetizioni per 4 serie \n 4x10 + 10 ovvero 4 superserie \n 3 x 12 / 10 / 8 ovvero 3 superserie con cambio di ripetizioni \n'
     this.openInfo(stringa)
   }
+
+  // apertura dialog per info 
   openInfo(stringa_info: string): void {
     const dialogRef = this.dialog.open(InfoDialogComponent, {});
     dialogRef.componentInstance.stringa_info = stringa_info;
   }
-  thirdPartyForm: FormGroup;
 
-  name = 'Angular';
-
-  productForm!: FormGroup;
   workoutDetails(): FormArray {
     return this.productForm.get('workoutDetails') as FormArray;
   }
@@ -246,35 +226,40 @@ export class HomeComponent implements OnInit {
     return this.productForm.value as FormArray;
   }
   workoutSingleDetails(index) {
-
     return this.exercise().at(index) as FormGroup;
   }
   ngOnDestroy() {
     this.showAddWorkoutForm = false;
   }
-
+  // elimina workout (service)
   eliminaWorkout(idWorkout: string) {
     this.openDialogAlert("Vuoi eliminare il workout?").then((result) => {
       if (result == 'yes') {
         this.workoutService
-      .deleteWorkout(idWorkout)
-      .subscribe({
-        next: (res) => {
-          this.getWorkouts();
-
-          // addForm.reset();
-        },
-        error: (HttpErrorResponse) => alert(HttpErrorResponse.message),
-      });
+          .deleteWorkout(idWorkout)
+          .subscribe({
+            next: (res) => {
+              this.getWorkouts();
+            },
+            error: (HttpErrorResponse) => alert(HttpErrorResponse.message),
+          });
       }
     });
-   
-
   }
+
+  // controllo se l'utente ha gia inserito dei workout 
+  findWorkout() {
+    if (this.workouts.length == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // rimuovo dal workout un esercizio selezionato dall'utente 
   removeExerciseOnddWorkout(idExercise: number) {
     this.exerciseWorkout.splice(idExercise, 1)
     this.workoutDetails().removeAt(idExercise)
-
   }
 }
 

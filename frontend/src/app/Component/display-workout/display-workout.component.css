@@ -1,87 +1,92 @@
-.mat-paginator-page-size {
- /* display: none !important;*/
-}
-.class-exercise-card{
-  width:100%;
-  height:100%;
-  text-align:center;
- 
+.class-exercise-card {
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
 
 .example-header-image {
-
-min-height: 60%;
-  max-height:100%; max-width:100%;
+  min-height: 60%;
+  max-height: 100%;
+  max-width: 100%;
 }
-.col-storico-esercizi{
+
+.col-storico-esercizi {
   top: 365px;
-  text-align:center;
+  text-align: center;
 }
-.intern-storico-esercizi{
-  width:100%;
-  height:100%;
-  
-}
-.col-paginator{
-  padding-top: 0%;
-  bottom:0px;
-  right:0%
+
+.intern-storico-esercizi {
+  width: 100%;
+  height: 100%;
 
 }
+
+.col-paginator {
+  padding-top: 0%;
+  bottom: 0px;
+  right: 0%
+}
+
 .mat-paginator-navigation .mat-paginator-previous {
   color: blue;
 }
-.paginator{ 
+
+.paginator {
   font-weight: bold;
-   position: absolute;
-  top:0px;
+  position: absolute;
+  top: 0px;
   width: 100%;
   left: 0;
-
   margin-bottom: 20%;
 }
+
 .exercise-card {
-  margin-top: 60px ;
+  margin-top: 60px;
   width: 100%;
   position: absolute;
   height: 90%;
- justify-content: center; /* Centra orizzontalmente */
+  justify-content: center;
+  /* Centra orizzontalmente */
   align-items: center;
-  text-align:center;
+  text-align: center;
 
 }
-.griglia-display{
+
+.griglia-display {
   height: 83%;
 }
-@media (max-height:655px){
-  .griglia-display{
+
+@media (max-height:655px) {
+  .griglia-display {
     display: block;
     min-height: 758px;
-
   }
+
   .exercise-card {
 
     position: absolute;
-   justify-content: center; /* Centra orizzontalmente */
+    justify-content: center;
+    /* Centra orizzontalmente */
     align-items: center;
-    text-align:center;
-  
+    text-align: center;
   }
 
 }
-input[type=text], select {
+
+input[type=number],
+select {
   width: 50%
 }
-.example-viewport {
 
+.example-viewport {
   height: 90%;
   width: 90%;
- 
 }
 
 .example-item {
   height: 50px;
 }
+
 .responsive-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -92,27 +97,25 @@ input[type=text], select {
   float: right;
   margin-top: 5px;
   width: 30%;
-
 }
+
 .div-button-fine-allenamento {
   width: 100%;
   height: 5%;
-
 }
 
-.form-exercise-details{
-
+.form-exercise-details {
   vertical-align: middle;
   display: inline;
 }
-input[type=text], select {
 
-  width: 40%;
+input[type=number],
+select {
+
+  width: 30%;
   padding: 12px 20px;
   margin: 8px 5;
- margin-left: 2%;
-
- margin-right: 2%;
+  margin-left: 2%;
   bottom: 0px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -125,10 +128,10 @@ input[type=text], select {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-
-  bottom:0%;
-  top:0px;
+  bottom: 0%;
+  top: 0px;
   right: 0px;
-  left:0px;
-  width: 100%;height: 100%;
+  left: 0px;
+  width: 100%;
+  height: 100%;
 }

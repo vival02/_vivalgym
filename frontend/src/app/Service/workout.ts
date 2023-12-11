@@ -1,5 +1,3 @@
-import { JsonpInterceptor } from "@angular/common/http";
-
 export interface Workout {
   user: {
     idUser: number;

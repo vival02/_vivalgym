@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -22,11 +23,11 @@ public class WorkoutSession {
     @JsonManagedReference(value="workoutSession-workoutSessionDetails")
     private Set<WorkoutSessionDetails> workoutSessionDetails;
 
-    public LocalDateTime dataSvolgimento ;
+    public Date dataSvolgimento ;
 
     public String statoSvolgimento;
 
-    public WorkoutSession(String idWorkoutSession, Workout workout, LocalDateTime dataSvolgimento, String statoSvolgimento) {
+    public WorkoutSession(String idWorkoutSession, Workout workout, Date dataSvolgimento, String statoSvolgimento) {
         this.idWorkoutSession = idWorkoutSession;
         this.workout = workout;
         this.dataSvolgimento = dataSvolgimento;
@@ -60,11 +61,11 @@ public class WorkoutSession {
         this.workout = workout;
     }
 
-    public LocalDateTime getDataSvolgimento() {
+    public Date getDataSvolgimento() {
         return dataSvolgimento;
     }
 
-    public void setDataSvolgimento(LocalDateTime dataSvolgimento) {
+    public void setDataSvolgimento(Date dataSvolgimento) {
         this.dataSvolgimento = dataSvolgimento;
     }
 

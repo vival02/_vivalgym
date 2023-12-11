@@ -2,10 +2,13 @@
   <p>STORICO ALLENAMENTI</p>
 </mat-toolbar>
 <div class="exercise-container">
-
+  <!-- Avviso se non ci sono allenamenti nello storico -->
+  <ng-template [ngIf]="findSession()">
+<h2 class="avviso_allenamento" >Non ci sono allenamenti nello storico!</h2></ng-template>
+<!-- Elenco allenamenti in ordine cronologico -->
   <mat-expansion-panel *ngFor="let allenamento of workoutSessions, index as i " class="exercise-panel">
     <mat-expansion-panel-header [collapsedHeight]="'120px'" class="header">
-      <mat-panel-title>{{allenamento.nome}} <br> {{allenamento.dataSvolgimento}}</mat-panel-title>
+      <mat-panel-title>{{allenamento.nome.toUpperCase()}} <br> {{allenamento.dataSvolgimento}}</mat-panel-title>
     </mat-expansion-panel-header>
     <p>ESERCIZI SVOLTI</p>
     <div class="responsive-grid">
@@ -18,17 +21,11 @@
               </mat-card-title>
               <mat-card-subtitle>{{exercise.exercise.tipologia}}</mat-card-subtitle>
             </mat-card-header>
-            <!-- <img mat-card-image src="#">-->
             <mat-card-content>
               <p *ngFor="let ripetizionixkg of exercise.ripetizionixkgJson">
-
-                {{ripetizionixkg.kilogrammi}}Kg x {{ripetizionixkg.ripetizioni}} ripetizioni
+                {{ripetizionixkg.kg}}Kg x {{ripetizionixkg.ripetizioni}} ripetizioni
               </p>
             </mat-card-content>
-            <mat-card-actions>
-
-              <!--<button mat-button>SEE MORE</button>-->
-            </mat-card-actions>
           </mat-card>
         </mat-list>
       </ng-container>

@@ -1,39 +1,40 @@
+<span class="wrap-card">
+  <!-- Spinner per serie richieste -->
+  <mat-card class="spinner-container">
+    <mat-card-content>
+      <div class="spinner-background">{{serieRichieste}}</div>
+      <mat-progress-spinner [value]="100" [mode]="" [diameter]="diameterSpinner" [strokeWidth]="10">
+        <ng-container>
+          <mat-spinner></mat-spinner>
 
-  <span class="wrap-card">
-    <mat-card class="spinner-container">
-      <mat-card-content>
-     <div class="spinner-background">{{serieRichieste}}</div>    
-        <mat-progress-spinner [value]="100" [mode]="" [diameter]="diameterSpinner" [strokeWidth]="10">
-          <ng-container>
-            <mat-spinner></mat-spinner>
-
-          </ng-container>
-        </mat-progress-spinner>
-        <h5 style="text-align: center;margin-top: 3%;">SERIE RICHIESTE</h5>
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="spinner-container-center">
-      <mat-card-content>
-      
-      <div class="spinner-background-center">{{calcuateCountodown()}}</div>    
-        <mat-progress-spinner [value]="calculateProgress()" [mode]="isFinished ? 'determinate' : 'indeterminate'"
-          diameter="150" [strokeWidth]="10">
-          <ng-container *ngIf="!isFinished">
-            <mat-spinner></mat-spinner>
-          </ng-container>
-        </mat-progress-spinner>
-        <h5 style="text-align: center; margin-top: 3%;">RECUPERO</h5>
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="spinner-container">
-      <mat-card-content>
-        <div class="spinner-background">{{serieSvolte}}</div> 
-        <mat-progress-spinner [value]="100" [mode]="" [diameter]="diameterSpinner" [strokeWidth]="10">
-          <ng-container>
-            <mat-spinner></mat-spinner>
-          </ng-container>
-        </mat-progress-spinner>
-        <h5 style="text-align: center; margin-top: 3%;">SERIE SVOLTE</h5>
-      </mat-card-content>
-    </mat-card>
-  </span>
+        </ng-container>
+      </mat-progress-spinner>
+      <h5 style="text-align: center;margin-top: 3%;">SERIE RICHIESTE</h5>
+    </mat-card-content>
+  </mat-card>
+  <!-- Spinner per timer tempo di recupero -->
+  <mat-card class="spinner-container-center">
+    <mat-card-content>
+      <div class="spinner-background-center">{{calcuateCountodown()}}</div>
+      <mat-progress-spinner [value]="calculateProgress()" [mode]="isFinished ? 'determinate' : 'indeterminate'"
+        diameter="150" [strokeWidth]="10">
+        <ng-container *ngIf="!isFinished">
+          <mat-spinner></mat-spinner>
+        </ng-container>
+      </mat-progress-spinner>
+      <h5 style="text-align: center; margin-top: 3%;">RECUPERO</h5>
+    </mat-card-content>
+  </mat-card>
+    <!-- Spinner per serie svolte  -->
+  <mat-card class="spinner-container">
+    <mat-card-content>
+      <div class="spinner-background">{{serieSvolte}}</div>
+      <mat-progress-spinner [value]="100" [mode]="" [diameter]="diameterSpinner" [strokeWidth]="10">
+        <ng-container>
+          <mat-spinner></mat-spinner>
+        </ng-container>
+      </mat-progress-spinner>
+      <h5 style="text-align: center; margin-top: 3%;">SERIE SVOLTE</h5>
+    </mat-card-content>
+  </mat-card>
+</span>

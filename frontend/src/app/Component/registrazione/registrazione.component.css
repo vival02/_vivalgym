@@ -1,6 +1,3 @@
-/* BASIC */
-
-
 
 a {
   color: #92badd;
@@ -19,22 +16,16 @@ h2 {
   color: #cccccc;
 }
 
-
-
-/* STRUCTURE */
-
 .wrapper {
-
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  bottom:0%;
-  top:0px;
+  bottom: 0%;
+  top: 0px;
   right: 0px;
-  left:0px;
-
+  left: 0px;
 }
 
 #formContent {
@@ -62,14 +53,10 @@ h2 {
 
 
 
-mat-form-field{
+mat-form-field {
   width: 80%;
   height: 10%;
-
 }
-/* FORM TYPOGRAPHY*/
-
-
 
 input[type=button]:hover,
 input[type=submit]:hover,
@@ -207,10 +194,6 @@ button[disabled] {
   width: 100%;
 }
 
-
-
-/* OTHERS */
-
 *:focus {
   outline: none;
 }
@@ -218,5 +201,3 @@ button[disabled] {
 #icon {
   width: 60%;
 }
-  
-  

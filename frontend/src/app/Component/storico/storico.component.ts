@@ -1,10 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { User } from '../../Service/user';
-import { WorkoutSession, WorkoutComplete, WorkoutSessionClass, ripetizionixkgArray, Ripetizionixkg } from '../../Service/workout';
+import { WorkoutComplete, WorkoutSessionClass, Ripetizionixkg } from '../../Service/workout';
 import { WorkoutService } from '../../Service/workout.service';
-import { Exercise } from 'src/app/Service/exercise';
-import { DatePipe } from '@angular/common';
 
+// componente per visualizzare allenamenti svolti 
 @Component({
   selector: 'app-storico',
   templateUrl: './storico.component.html',
@@ -12,12 +11,13 @@ import { DatePipe } from '@angular/common';
 })
 export class StoricoComponent implements OnInit {
   private user: User = JSON.parse(sessionStorage.getItem('User'));
+  private workoutService = inject(WorkoutService);
+  protected workoutSessions: WorkoutSessionClass[] = [] // elenco allenamenti dell'utente 
+  private workoutsComplete: WorkoutComplete[] = []
+  private workoutData: workoutData[] = []
+  private i: number = 0;
+  private exercise = [];
 
-  workoutService = inject(WorkoutService);
-  workoutSessions: WorkoutSessionClass[] = []
-  workoutsComplete: WorkoutComplete[] = []
-  workoutData: workoutData[] = []
-  exercise = [];
   workoutDataSingle: workoutData = {
     idWorkoutSession: '',
     exercise: []
@@ -26,7 +26,8 @@ export class StoricoComponent implements OnInit {
     exercise: null,
     ripetizionixkg: []
   };
-  private i: number = 0;
+
+  // get allenamenti dell'utente (service)
   getWorkoutsComplete(): void {
     this.workoutService.getWorkoutsComplete(this.user.idUser).subscribe({
       next: (res) => {
@@ -35,33 +36,50 @@ export class StoricoComponent implements OnInit {
       error: (error) => { alert('Unable to get list of workouts') },
       complete: () => {
         var temp = [];
-
         this.workoutsComplete.forEach(element => {
           this.pushworkoutSessions(element.workoutSession, element.nome)
         });
-        this.workoutSessions.sort(function (a, b) {
-          return new Date(b.dataSvolgimento).getTime() - new Date(a.dataSvolgimento).getTime();
+        // ordinamento in ordine cronologico 
+        this.workoutSessions.sort(function (a: { dataSvolgimento: Date }, b: { dataSvolgimento: Date }) {
+          var da = new Date(a.dataSvolgimento);
+          var db = new Date(b.dataSvolgimento);
+          if (da > db) {
+            return -1;
+          } else if (da < db) {
+            return 1;
+          } else {
+            return 0;
+          }
         });
-        console.log(this.workoutSessions)
+        var date;
+        var yyyy;
+        // formattazione date 
+        const options: Intl.DateTimeFormatOptions = { month: "short", day: 'numeric', year: 'numeric', hour: 'numeric', minute: "numeric" };
+        this.workoutSessions.forEach(element => {
+          date = new Date(element.dataSvolgimento).toLocaleString("it-IT", options)
+          element.dataSvolgimento = date
+        });
         this.getDataWorkoutSession()
       }
     });
   }
 
+  // controllo se ci sono allenamenti 
+  findSession() {
+    if (this.workoutSessions.length == 0) {
+      return true;
+    }
+    return false;
+  }
+
+  // inserire kg e ripetizioni di ogni singolo esercizio 
   pushworkoutSessions(workoutSessions: WorkoutSessionClass[], nome: string) {
-    var date;
-    var yyyy;
-    const options: Intl.DateTimeFormatOptions = { month: "short", day: 'numeric', year: 'numeric', hour: 'numeric', minute: "numeric" };
     workoutSessions.forEach(element => {
       element.nome = nome
       this.workoutSessions.push(element);
-      date = new Date(element.dataSvolgimento).toLocaleString("it-IT",options)
-      element.dataSvolgimento = date
       element.workoutSessionDetails.forEach(workoutSessionDetails => {
-      var ripetizioniParse = JSON.parse(workoutSessionDetails.ripetizionixkg);
-
+        var ripetizioniParse = JSON.parse(workoutSessionDetails.ripetizionixkg);
         workoutSessionDetails.ripetizionixkgJson = ripetizioniParse
-        console.log(workoutSessionDetails.ripetizionixkg)
       });
     });
   }
@@ -75,40 +93,31 @@ export class StoricoComponent implements OnInit {
     });
   }
 
+
   getDataWorkoutSession() {
     this.workoutData.length = 0;
     this.exerciseAndData.ripetizionixkg.length = 0
-    //console.log(this.workoutSessions)
     this.workoutSessions.forEach(element1 => {
       this.workoutDataSingle.idWorkoutSession = element1.idWorkoutSession;
-      //  console.log(element1.workoutSessionDetails)
       element1.workoutSessionDetails.forEach(element => {
         this.exerciseAndData.exercise = element.exercise;
         this.exerciseAndData.ripetizionixkg.push(JSON.parse(element.ripetizionixkg))
         this.workoutDataSingle.exercise.push(element.exercise);
-
       });
       this.workoutData.push(this.workoutDataSingle)
-      //console.log(" single " + this.workoutDataSingle.exercise)
     })
 
-    // console.log(this.workoutSessions)
   }
+
   findExercise(i: string) {
-    // REALIZZAZIONE => continua ad aggiornare perchè deve chiamare una funzione meglio se fai una funzione 
     return (this.workoutData.filter(element => { element.idWorkoutSession == i }))
-    return this.exercise
   }
-  calcolaColonne() {
-    return this.workoutSessions.length
-  }
+
   ngOnInit(): void {
-
     this.getWorkoutsComplete();
-
   }
-
 }
+
 export class workoutData {
   idWorkoutSession: string;
   exercise: object[]
