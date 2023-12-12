@@ -51,6 +51,7 @@ import { DialogAlertComponent } from './Component/dialog-alert/dialog-alert.comp
     DialogExerciseDettagliComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     MatSidenavModule,

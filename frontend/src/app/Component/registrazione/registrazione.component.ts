@@ -3,11 +3,27 @@ import { User } from "../../Service/user";
 import { UserService } from "../../Service/user.service";
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { animate, style, transition, trigger } from '@angular/animations';
+const enterTransition = transition(':enter', [
+  style({
+    opacity: 0,
+  }),
+  animate('1s ease-in', style({ opacity: 1 })),
+]);
+const fadeIn = trigger('fadeIn', [enterTransition]);
 // Form per registrazione nuovo utente 
 @Component({
   selector: 'app-registrazione',
   templateUrl: './registrazione.component.html',
-  styleUrls: ['./registrazione.component.css']
+  styleUrls: ['./registrazione.component.css'],
+  animations: [
+    trigger('fade', [ 
+      transition('void => *', [
+        style({ opacity: 0 }), 
+        animate(1000, style({opacity: 1}))
+      ]) 
+    ])
+  ]
 })
 export class RegistrazioneComponent implements OnInit {
   hide = true;

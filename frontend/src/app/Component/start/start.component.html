@@ -4,7 +4,7 @@
   <mat-grid-tile colspan="1" rowspan='3'
     style=" margin-bottom: 5%;"><img style="max-height: 100%;min-width: 100%;" src="./assets/Immagini/panel_iniziale_up.png" />
     <br></mat-grid-tile>
-    <mat-grid-tile colspan="1" rowspan='3'
+    <mat-grid-tile  @fade colspan="1" rowspan='3'
     style="margin-bottom: 5%;">
     <div class="wrapper fadeInDown">
       <div id="formContent">
@@ -12,7 +12,7 @@
           <h2 style="color:black;">LOGIN</h2><br>
         </div>
         <!-- Login Form  -->
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container">
+        <form  @fade [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container">
           <mat-form-field>
             <mat-label color="black" >Inserisci email</mat-label>
             <input matInput  placeholder="email@example.com" class="fadeIn-second" formControlName="email" required
