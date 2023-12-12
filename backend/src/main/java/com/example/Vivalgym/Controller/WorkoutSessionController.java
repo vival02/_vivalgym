@@ -28,18 +28,15 @@ public class WorkoutSessionController {
     }
     @PostMapping("/workoutSession")
     public void addWorkoutSession(@RequestBody WorkoutSession workoutSession) {
-        //System.out.println(exercise.toString());
         workoutSessionService.addWorkoutSession(workoutSession);
     }
     @PostMapping("/workoutSession/{idWorkout}")
     public void addWorkoutSessionWithId(@PathVariable String idWorkout , @RequestBody WorkoutSession workoutSession) {
-        //System.out.println(exercise.toString());
         workoutSessionService.addWorkoutSessionWithId(idWorkout,workoutSession);
     }
 
     @PostMapping("/add-workout-session-and-details")
     public void addWorkoutAndExercise(@RequestBody WorkoutSession workoutSession ) {
-        System.out.println("-------- ok" +workoutSession.getDataSvolgimento());
         Set<WorkoutSessionDetails> workoutSessionDetails = workoutSession.getWorkoutSessionDetails();
         workoutSessionService.addWorkoutSession(workoutSession);
     }

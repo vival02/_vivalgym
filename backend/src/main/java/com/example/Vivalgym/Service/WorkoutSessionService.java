@@ -24,7 +24,7 @@ public class WorkoutSessionService {
         Optional<Workout> foundWorkout =workoutRepository.findById(workoutsession.getWorkout().getIdWorkout());
 
         if(!foundWorkout.isEmpty()){
-            System.out.println("wwwwwwwwwwwwwwwwwwww" +workoutsession.getIdWorkoutSession());
+
             workoutsession.setWorkout(foundWorkout.get());
             workoutsession.setIdWorkoutSession(workoutSessionKey(foundWorkout.get()));
 
@@ -43,21 +43,13 @@ public class WorkoutSessionService {
        Optional<Workout> foundWorkout =workoutRepository.findById(idWorkout);
         Set<WorkoutSessionDetails> workoutSessionDetails ;
         if(!foundWorkout.isEmpty()){
-
             workoutSession.setWorkout(foundWorkout.get());
             workoutSession.setIdWorkoutSession(workoutSessionKey(foundWorkout.get()));
-           /* workoutSessionDetails = workoutSession.getWorkoutSessionDetails();
-            for (WorkoutSessionDetails workoutSessionDetail: workoutSessionDetails) {
-                workoutSessionDetail.setNumeroEsercizio();
-            }*/
-            
             workoutSessionRepository.save(workoutSession);
         }else{
             throw new ApiRequestException("User or exercise not found");
         }
-
         return workoutSessionKey(foundWorkout.get());
-
     }
 
     public Optional<WorkoutSession[]> getAllWorkoutSessionsWithIdUser(String idUser) {

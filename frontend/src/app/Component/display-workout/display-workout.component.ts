@@ -13,6 +13,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, } from '@angular/forms
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogContent, } from '@angular/material/dialog';
 import { TimerComponent } from '../timer/timer.component';
+import { Exercise } from 'src/app/Service/exercise';
 // componente per display workout da eseguire
 @Component({
   selector: 'app-display-workout',
@@ -91,7 +92,14 @@ export class DisplayWorkoutComponent implements OnInit {
     }
 
   }
+  isCardio(exercise:Exercise){
+    if(exercise.gruppoMuscolare == "Cardio"){
+        return true
+    }else{
+        return false
+    }
 
+  }
   constructor(private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder, private router: Router, public dialog: MatDialog) {
     this.idWorkout = String(this.route.snapshot.params['idWorkout']);
     this.exerciseForm = this.fb.group({

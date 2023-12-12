@@ -10,7 +10,7 @@
           </mat-card-title>
           <br>
           <mat-card-subtitle>
-            <img alt="My image name" [src]="exercise.linkImmagine" />
+            <img alt="My image name" [src]="exercise.linkImmagine" referrerpolicy="no-referrer" />
           </mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions>
@@ -32,7 +32,7 @@
           </mat-card-title>
           <mat-card-subtitle>{{exercise.tipologia}}</mat-card-subtitle>
         </mat-card-header>
-        <img [src]="exercise.immagine" class="example-header-image">
+        <img [src]="exercise.immagine" class="example-header-image" referrerpolicy="no-referrer">
         <mat-card-content>
           <p>
             {{exercise.note}}

@@ -28,8 +28,6 @@ public class UserController {
     }
     @GetMapping("/users/workouts/{id}")
     public Optional<Workout[]> getUseWorkouts(@PathVariable Integer id) {
-
-        //System.out.println("----------------------"+user.toString());
         return workoutService.getWorkoutsByidUser(id);
     }
 

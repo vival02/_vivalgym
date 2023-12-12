@@ -255,7 +255,14 @@ export class HomeComponent implements OnInit {
       return false;
     }
   }
+  isCardio(exercise:Exercise){
+    if(exercise.gruppoMuscolare == "Cardio"){
+        return true
+    }else{
+        return false
+    }
 
+  }
   // rimuovo dal workout un esercizio selezionato dall'utente 
   removeExerciseOnddWorkout(idExercise: number) {
     this.exerciseWorkout.splice(idExercise, 1)

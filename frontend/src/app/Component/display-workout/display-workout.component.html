@@ -19,16 +19,15 @@
         </mat-card-title>
         <mat-card-subtitle>{{ prova.ripetizioniBase }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
-        <p>
-          {{ prova.note }}
-        </p>
-      </mat-card-content>
       <mat-card-actions style="width: 100%; height: 100%;">
-        <img [src]=" card.exercise.immagine" class="example-header-image">
+        <img [src]=" card.exercise.immagine" class="example-header-image" referrerpolicy="no-referrer">
          <!-- Form kg/ripetizioni -->
+         <ng-template [ngIf]="!isCardio(card.exercise)"> 
         <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()" class="form-exercise-details" class="form-ripetizioni">
           <mat-list style="height: 70%; width: 100%;"> <mat-list-item style="height: 70%; width: 100%;">
+            <h4>
+              Note esercizio: {{ card.note }}
+            </h4>
               <h4 style="margin-top: 2%; margin-bottom: 2%;" *ngIf="!exerciseForm.valid"> INSERIRE KG E RIPETIZIONI</h4>
               <input matInput type="number"  formControlName="kg" class="form-control" placeholder="kg" autocomplete="off"
                 required min="1" max="999"  />
@@ -42,7 +41,7 @@
               </button>
             </mat-list-item>
           </mat-list>
-        </form>
+        </form> </ng-template>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>

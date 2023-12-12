@@ -42,19 +42,11 @@ public class WorkoutController {
     public void addWorkoutAndExercise(@RequestBody Workout workout) {
 
         exercises = workout.getWorkoutDetails();
-
-        System.out.println("ESERCIZIO  -----------------" + exercise.toString());
-
         String idWorkout = workoutService.addWorkoutKey(workout);
 
         //  workoutDetailsService.addExercisesWorkout(idWorkout,exercises);
     }
 
-    /*    @PostMapping("/add-workout-and-exercise/{idUser}")
-     public void addWorkoutAndExercise(@PathVariable Integer idUser, @RequestBody Workout workout,@RequestBody WorkoutDetails[] exercises) {
-         String idWorkout = workoutService.addWorkoutKey(workout);
-         workoutDetailsService.addExercisesWorkout(idWorkout,exercises);
-     }*/
     @GetMapping("/workout/{idWorkout}")
     public Optional<Workout> getWorkoutByIdWorkout(@PathVariable String idWorkout) {
         return workoutService.getWorkoutsByIdWorkout(idWorkout);

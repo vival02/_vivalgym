@@ -42,7 +42,7 @@
       <button mat-icon-button (click)="addWorkoutForm(true)" style="float: right">
         <mat-icon>close</mat-icon>
       </button>
-      <input matInput class="formAddExercise-text" type="text" id="fname" formControlName="nome"
+      <input matInput class="formAddExercise-text" type="text" maxlength="40" id="fname" formControlName="nome"
         placeholder="NOME WORKOUT" required autocomplete="off" />
       <ng-template [ngIf]="!isFormValid()" style="float: center;">
         <p>Inserisci il nome e almeno un esercizio</p>
@@ -65,19 +65,22 @@
             <p>
               {{ exercise.note }}
             </p>
-            <div [formGroup]="workoutSingleDetails(i)">
+            <div [formGroup]="workoutSingleDetails(i)" >
+              <ng-template [ngIf]="!isCardio(exercise)"> 
               <mat-icon color="black" (click)="openInfoRipetizioni()">info</mat-icon><input class="form-control-text"
-            id="nome" type="number" min="0" max="999" formControlName="ripetizioniBase" placeholder="Inserisci ripetizioni"
+            id="nome" type="text" maxlength="10" formControlName="ripetizioniBase" placeholder="Inserisci ripetizioni"
                 autocomplete="off" />
-              <br />
+              <br /> </ng-template>
               <mat-icon color="black" matTooltip="Inserire note riguardanti l'esercizio">info</mat-icon> <input matInput
                 class="form-control-text" type="text" id="note" formControlName="note" placeholder="Inserisci note"
                 autocomplete="off" />
               <br/> 
+              <ng-template [ngIf]="!isCardio(exercise)"> 
               <mat-icon color="black"
                 matTooltip="Inserire il tempo di recupero tra una serie e l'altra di questo specifico esercizio">info</mat-icon><input
                 matInput class="form-control-text" type="number" min="0" max="999" id="note" formControlName="tempoRecupero"
-                placeholder="Inserisci secondi recupero" autocomplete="off"/>
+                placeholder="Inserisci secondi recupero" autocomplete="off"/></ng-template>
+              
             </div>
           </mat-card-content>
           <mat-card-actions>

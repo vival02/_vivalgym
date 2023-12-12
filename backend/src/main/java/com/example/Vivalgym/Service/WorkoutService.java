@@ -36,7 +36,7 @@ public class WorkoutService {
         return workoutRepository.findAll();
     }
     public Optional<Workout[]> getWorkoutsByidUser(Integer idUser) {
-        System.out.println("------------" + idUser);
+
         return workoutRepository.findWorkoutByUser(idUser);
     }
 public String getNextKey(Workout workout){
@@ -63,7 +63,6 @@ public String getNextKey(Workout workout){
     public String addWorkoutKey(Workout workout) {
         String idWorkout = null;
         Integer lengthWorkout = 0;
-        System.out.println(workout.toString());
         Optional<User> foundUser =userRepository.findById(workout.getUser().getIdUser());
         if(!workoutRepository.findTopByOrderByIdWorkoutDescMyQuery().isEmpty()){
             String lastKey =workoutRepository.findTopByOrderByIdWorkoutDescMyQuery().get();
@@ -120,22 +119,15 @@ public String getNextKey(Workout workout){
 
                 while(iterator.hasNext() && !trovato ) {
                     i++;
-                    System.out.println(i);
                     workoutDetailsModify= (WorkoutDetails) iterator.next();
                     workoutDetailsModify.setIdExercise(workoutDetailsModify.getExercise().getIdExercise());
                     workoutDetailsModify.setIdWorkout(idWorkout);
-                  //  System.out.println("versione da angular : " + workoutDetailsModify.toString());
-                   // System.out.println("versione da spring : " + workoutDetails.toString());
-                    System.out.println("chiave da angular : " + workoutDetailsModify.getIdWorkoutDetails());
-                    System.out.println("chiave da spring : " + workoutDetails.getIdWorkoutDetails());
                     if(workoutDetails.equals(workoutDetailsModify)){
                          trovato = true;
                     }
 
                 }
                 if(!trovato){
-                    System.out.println("trovato "  + trovato);
-                    System.out.println("prova eliminazione");
 
                     workoutDetailsRepository.deleteByIdMyQuery(workoutDetails.getIdWorkoutDetails());
                 }

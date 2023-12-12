@@ -32,9 +32,7 @@ public class WorkoutSessionDetailsService {
         if(!foundWorkoutSession.isEmpty() && !foundExercise.isEmpty()){
             workoutSessionDetails.setExercise(foundExercise.get());
             workoutSessionDetails.setWorkoutSession(foundWorkoutSession.get());
-            System.out.println();
-            System.out.println();
-            System.out.println("-----------------------"+workoutSessionDetails.toString());
+
             workoutSessionDetailsRepository.save(workoutSessionDetails);
 
         }else{
@@ -51,9 +49,7 @@ public class WorkoutSessionDetailsService {
             workoutSessionDetails.setExercise(foundExercise.get());
             workoutSessionDetails.setWorkoutSession(foundWorkoutSession.get());
           //  workoutSessionDetails.setNumeroEsercizio(0);
-            System.out.println();
-            System.out.println();
-            System.out.println("-----------------------"+workoutSessionDetails.toString());
+
             workoutSessionDetailsRepository.save(workoutSessionDetails);
 
         }else{
